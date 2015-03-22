@@ -16,13 +16,16 @@ public class PianoControl : IGameControl
 		view = paramView;
 	}
 	
+	public void InteractMenu(MenuAction paramAction)
+	{
+	}
+	
 	public void InteractPianoKey(PianoKey paramKey, bool paramPlay)
 	{
 		if (paramPlay && model != null)
 			model.Press(paramKey);
 		if (!paramPlay && model != null)
 			model.Release(paramKey);
-		view.DisableKeyboard();
 	}
 
 	public void SetModel(IGameModel paramModel)
@@ -33,6 +36,5 @@ public class PianoControl : IGameControl
 	public void SetView(IGameView paramView)
 	{
 		view = paramView;
-		view.EnableKeyboard();
 	}
 }

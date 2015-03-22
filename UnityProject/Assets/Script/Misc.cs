@@ -2,6 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum MenuAction
+{
+	Nav_Left,
+	Nav_Right,
+	Nav_Yes,
+	Nav_No
+}
+
 public enum PianoKey
 {
 	L_A,

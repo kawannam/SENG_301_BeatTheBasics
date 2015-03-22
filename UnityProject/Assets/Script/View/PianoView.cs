@@ -7,7 +7,7 @@ public class PianoView : MonoBehaviour, IGameView
 	private IGameModel model;
 	private IGameControl control;
 	public List<AudioSource> audioList = new List<AudioSource>();
-	private bool keyboardEnabled;
+	private bool keyboardEnabled = true;
 
 	public PianoView()
 	{
@@ -44,6 +44,8 @@ public class PianoView : MonoBehaviour, IGameView
 	// Update is called once per frame
 	void Update () 
 	{
+		if (!keyboardEnabled)
+			return;
 		control.InteractPianoKey(PianoKey.L_C, Input.GetKey(KeyCode.Q));
 		control.InteractPianoKey(PianoKey.L_Cs,Input.GetKey(KeyCode.Alpha2));
 		control.InteractPianoKey(PianoKey.L_D, Input.GetKey(KeyCode.W));

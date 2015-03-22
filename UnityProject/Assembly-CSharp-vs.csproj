@@ -49,9 +49,11 @@
      <Compile Include="Assets\Script\Interfaces\IGameControl.cs" />
      <Compile Include="Assets\Script\Interfaces\IGameModel.cs" />
      <Compile Include="Assets\Script\Interfaces\IGameView.cs" />
+     <Compile Include="Assets\Script\Metronome.cs" />
      <Compile Include="Assets\Script\Misc.cs" />
      <Compile Include="Assets\Script\PianoControl.cs" />
      <Compile Include="Assets\Script\PianoGame.cs" />
+     <Compile Include="Assets\Script\PlayByEar.cs" />
      <Compile Include="Assets\Script\View\PianoView.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
