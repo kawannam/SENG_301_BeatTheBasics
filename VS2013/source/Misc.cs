@@ -59,10 +59,17 @@ public class AudioClip
 	}
 }
 
-public interface AudioSource
+public class AudioSource
 {
-	bool IsPlaying{ get; }
-	bool IsLooping{ get; }
-	float Position{ get; }
+    private AudioClip clip;
+
+    public bool IsPlaying { get; set; }
+    public bool IsLooping { get; set; }
+    public float Position { get; set; }
+
+    public AudioSource(AudioClip paramClip)
+    {
+        clip = paramClip;
+    }
 }
 

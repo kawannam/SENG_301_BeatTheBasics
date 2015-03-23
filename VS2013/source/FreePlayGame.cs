@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-public class FreePlayGame : IGameModel
-{	
-	private ArrayList aList = new ArrayList();
-
-	private AudioClip[] audioClipList = new AudioClip[]{
+namespace PianoGame
+{
+    public class Keyboard : IGameModel
+    {
+        private ArrayList aList = new ArrayList();
+        private AudioSource[] audioSources;
+        
+        private AudioClip[] audioClipList = new AudioClip[]{
 			new AudioClip("Sounds/A-Note", 1),
 			new AudioClip("Sounds/A#-Note",1),
 			new AudioClip("Sounds/B-Note", 1),
@@ -31,49 +34,49 @@ public class FreePlayGame : IGameModel
 			new AudioClip("Sounds/G-Note", 2),
 			new AudioClip("Sounds/G#-Note",2)
 	};
-	
-	private KeyState[] currKeyStates = new KeyState[(int)PianoKey.MAX];
-	private KeyState[] prevKeyStates = new KeyState[(int)PianoKey.MAX];
-	
-	public AudioClip[] AudioClipList{ get{ return audioClipList; } }
-	public KeyState[] KeyAudioStates{ get{ return currKeyStates; } }
 
-	public KeyState[] CurrKeyStates{ get{ return currKeyStates; } }
-	public KeyState[] PrevKeyStates{ get{ return currKeyStates; } }
+        private KeyState[] currKeyStates = new KeyState[(int)PianoKey.MAX];
+        private KeyState[] prevKeyStates = new KeyState[(int)PianoKey.MAX];
 
-	public FreePlayGame()
-	{	
-	}
+        public AudioClip[] AudioClips { get { return audioClipList; } }
+        public AudioSource[] AudioSources { get { return audioSources; } }
 
-	public void AddObserver(IGameView paramView)
-	{
-		aList.Add(paramView);
-	}
+        public KeyState[] CurrKeyStates { get { return currKeyStates; } }
+        public KeyState[] PrevKeyStates { get { return prevKeyStates; } }
 
-	public void RemoveObserver(IGameView paramView)
-	{
-		aList.Remove(paramView);
-	}
+        public Keyboard()
+        {
+            audioSources = new AudioSource[audioClipList.Length];
+            for (int i = 0; i < audioClipList.Length; i++)
+            {
+                AudioClip ac = audioClipList[i];
+                audioSources[i] = new AudioSource(ac);
+            }
+        }
 
-	public void NotifyObservers()
-	{
-		foreach(IGameView view in aList)
-			view.Update(this);
-	}
-	
-	public void Press(PianoKey paramKey)
-	{
-		int keyIdx = (int)paramKey;
-		prevKeyStates[keyIdx] = currKeyStates[keyIdx];
-		currKeyStates[keyIdx] = KeyState.Pressed;
-		NotifyObservers();
-	}
+        public void AddObserver(IGameView paramView)
+        {
+            aList.Add(paramView);
+        }
 
-	public void Release(PianoKey paramKey)
-	{
-		int keyIdx = (int)paramKey;
-		prevKeyStates[keyIdx] = currKeyStates[keyIdx];
-		currKeyStates[keyIdx] = KeyState.Released;
-		NotifyObservers();
-	}
+        public void RemoveObserver(IGameView paramView)
+        {
+            aList.Remove(paramView);
+        }
+
+        public void NotifyObservers()
+        {
+            foreach (IGameView view in aList)
+                view.Update(this);
+        }
+
+        public void InteractPianoKey(PianoKey paramKey, KeyState paramState)
+        {
+            int keyIdx = (int)paramKey;
+            prevKeyStates[keyIdx] = currKeyStates[keyIdx];
+            currKeyStates[keyIdx] = paramState;
+            audioSources[keyIdx].IsPlaying = (paramState == KeyState.Pressed) ? true : false;
+            NotifyObservers();
+        }
+    }
 }

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 public interface IGameModel
 {
 	KeyState[] CurrKeyStates{ get; }
-	KeyState[] PrevKeyStates{ get; }
-	AudioClip[] AudioClipList{ get; }
+    KeyState[] PrevKeyStates { get; }
+    AudioClip[] AudioClips { get; }
+    AudioSource[] AudioSources{ get; }
 
-	void Press(PianoKey paramKey);
- 	void Release(PianoKey paramKey);
+	void InteractPianoKey(PianoKey paramKey, KeyState paramState);
 	void AddObserver(IGameView paramView);
 	void RemoveObserver(IGameView paramView);
 	void NotifyObservers();

@@ -2,7 +2,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp - Model", "Assembly-CSharp - Model.csproj", "{D63371F9-F3BB-4FBD-8A43-6BCED37BD5BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PianoGameModel", "PianoGameModel.csproj", "{D63371F9-F3BB-4FBD-8A43-6BCED37BD5BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{9C7ACAE9-74D5-44E7-8AE9-136DA57CC1F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,6 +16,10 @@ Global
 		{D63371F9-F3BB-4FBD-8A43-6BCED37BD5BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D63371F9-F3BB-4FBD-8A43-6BCED37BD5BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D63371F9-F3BB-4FBD-8A43-6BCED37BD5BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C7ACAE9-74D5-44E7-8AE9-136DA57CC1F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7ACAE9-74D5-44E7-8AE9-136DA57CC1F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7ACAE9-74D5-44E7-8AE9-136DA57CC1F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C7ACAE9-74D5-44E7-8AE9-136DA57CC1F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

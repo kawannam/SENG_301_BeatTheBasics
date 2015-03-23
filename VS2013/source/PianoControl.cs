@@ -19,12 +19,10 @@ public class PianoControl : IGameControl
 	{
 	}
 	
-	public void InteractPianoKey(PianoKey paramKey, bool paramPlay)
+	public void InteractPianoKey(PianoKey paramKey, KeyState paramState)
 	{
-		if (paramPlay && model != null)
-			model.Press(paramKey);
-		if (!paramPlay && model != null)
-			model.Release(paramKey);
+		if (model != null)
+			model.InteractPianoKey(paramKey, paramState);
 	}
 
 	public void SetModel(IGameModel paramModel)
