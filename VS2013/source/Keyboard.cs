@@ -54,22 +54,6 @@ namespace PianoGame
             }
         }
 
-        public void AddObserver(IGameView paramView)
-        {
-            aList.Add(paramView);
-        }
-
-        public void RemoveObserver(IGameView paramView)
-        {
-            aList.Remove(paramView);
-        }
-
-        public void NotifyObservers()
-        {
-            foreach (IGameView view in aList)
-                view.Update(this);
-        }
-
         public void InteractPianoKey(PianoKey paramKey, KeyState paramState)
         {
             int keyIdx = (int)paramKey;

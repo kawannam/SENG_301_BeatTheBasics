@@ -8,7 +8,7 @@ namespace UnitTestProject1
     public class UnitTest1
     {
         [TestMethod]
-        public void FreePlay_PressTest()
+        public void Keyboard_PressTest()
         {
             IGameModel game = new Keyboard();
             game.InteractPianoKey(PianoKey.H_A, KeyState.Pressed);
@@ -19,7 +19,7 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void FreePlay_ReleaseTest()
+        public void Keyboard_ReleaseTest()
         {
             IGameModel game = new Keyboard();
             game.CurrKeyStates[(int)PianoKey.H_A] = KeyState.Pressed;
@@ -32,7 +32,7 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void FreePlay_PlayNoteTest()
+        public void Keyboard_PlayNoteTest()
         {
             IGameModel game = new Keyboard();
             game.InteractPianoKey(PianoKey.H_A, KeyState.Pressed);
@@ -43,7 +43,7 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void FreePlay_StopNoteTest()
+        public void Keyboard_StopNoteTest()
         {
             IGameModel game = new Keyboard();
             game.AudioSources[(int)PianoKey.H_A].IsPlaying = true;
