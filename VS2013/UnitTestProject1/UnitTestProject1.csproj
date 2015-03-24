@@ -54,9 +54,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PianoGameModel.csproj">
+    <ProjectReference Include="..\PianoGame.csproj">
       <Project>{d63371f9-f3bb-4fbd-8a43-6bced37bd5ba}</Project>
-      <Name>PianoGameModel</Name>
+      <Name>PianoGame</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

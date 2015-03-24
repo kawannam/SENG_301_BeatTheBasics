@@ -1,19 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using PianoGame;
 
-public class PianoView : MonoBehaviour, IGameView  
+public class KeyboardView : MonoBehaviour, IKeyboardView  
 {
-	private IGameModel model;
-	private IGameControl control;
+	private IKeyboardModel model;
+	private IKeyboardControl control;
 	public List<AudioSource> audioList = new List<AudioSource>();
 	private bool keyboardEnabled = true;
 
-	public PianoView()
+	public KeyboardView()
 	{
 	}
 
-	void WireUp(IGameControl paramControl, IGameModel paramModel)
+	void WireUp(IKeyboardControl paramControl, IKeyboardModel paramModel)
 	{
 		if (model != null)
 		{
@@ -28,11 +29,11 @@ public class PianoView : MonoBehaviour, IGameView
 
 	// Use this for initialization
 	void Start () {
-		model = new FreePlayGame();
-		control = new PianoControl();
+		model = new KeyboardModel();
+		control = new KeyboardControl();
 		WireUp(control, model);
 		audioList = new List<AudioSource>();
-		foreach (BBAudioClip ac in model.AudioClipList)
+		foreach (SoundFile ac in model.AudioClips)
 		{	
 			AudioSource source = gameObject.AddComponent<AudioSource>();
 			source.clip = Resources.Load<AudioClip>(ac.FilePath);
@@ -83,9 +84,9 @@ public class PianoView : MonoBehaviour, IGameView
 		keyboardEnabled = true;
 	}
 
-	public void Update(IGameModel paramModel)
+	public void Update(IKeyboardModel paramModel)
 	{
-		IGameModel m = paramModel;
+		IKeyboardModel m = paramModel;
 		for(int i = 0; i < (int)PianoKey.MAX; i++)
 		{
 			KeyState ks = m.CurrKeyStates[i];

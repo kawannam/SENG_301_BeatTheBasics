@@ -8,8 +8,7 @@
     <ProjectGuid>{D63371F9-F3BB-4FBD-8A43-6BCED37BD5BA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace>PianoGame</RootNamespace>
     <AssemblyName>PianoGame</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -19,8 +18,8 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_4_6_3;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -28,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>Temp\bin\Release\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -52,17 +51,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="source\Game.cs" />
-    <Compile Include="source\interfaces\IGameControl.cs" />
-    <Compile Include="source\interfaces\IGameModel.cs" />
-    <Compile Include="source\interfaces\IKeyboardControl.cs" />
-    <Compile Include="source\interfaces\IControl.cs" />
-    <Compile Include="source\interfaces\IKeyboardModel.cs" />
-    <Compile Include="source\interfaces\IKeyboardView.cs" />
-    <Compile Include="source\Misc.cs" />
-    <Compile Include="source\Keyboard.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="interfaces\IGameControl.cs" />
+    <Compile Include="interfaces\IGameModel.cs" />
+    <Compile Include="interfaces\IKeyboardControl.cs" />
+    <Compile Include="interfaces\IControl.cs" />
+    <Compile Include="interfaces\IKeyboardModel.cs" />
+    <Compile Include="interfaces\IKeyboardView.cs" />
+    <Compile Include="KeyboardControl.cs" />
+    <Compile Include="Misc.cs" />
+    <Compile Include="Keyboard.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)bin\Debug\PianoGame.dll" "$(SolutionDir)..\UnityProject\Assets\Plugins" /Y /I</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 	   Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -7,10 +7,10 @@ namespace PianoGame
     {
         KeyState[] CurrKeyStates { get; }
         KeyState[] PrevKeyStates { get; }
-        AudioClip[] AudioClips { get; }
-        AudioSource[] AudioSources { get; }
+        SoundFile[] AudioClips { get; }
+        SoundSource[] AudioSources { get; }
 
-        void InteractPianoKey(PianoKey paramKey, KeyState paramState);
+        void InteractPianoKey(PianoKey paramKey, bool paramState);
         void AddObserver(IKeyboardView paramView);
         void RemoveObserver(IKeyboardView paramView);
         void NotifyObservers();

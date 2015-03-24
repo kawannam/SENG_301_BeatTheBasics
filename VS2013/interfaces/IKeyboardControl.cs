@@ -5,6 +5,6 @@ namespace PianoGame
 {
     public interface IKeyboardControl : IControl
     {
-        void InteractPianoKey(PianoKey paramKey, KeyState paramState);
+        void InteractPianoKey(PianoKey paramKey, bool paramState);
     }
 }

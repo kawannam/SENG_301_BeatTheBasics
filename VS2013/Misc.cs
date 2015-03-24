@@ -46,7 +46,7 @@ namespace PianoGame
         Pressed
     }
 
-    public class AudioClip
+    public class SoundFile
     {
         private string filePath;
         public string FilePath { get { return filePath; } }
@@ -54,22 +54,22 @@ namespace PianoGame
         private float pitch;
         public float Pitch { get { return pitch; } }
 
-        public AudioClip(string paramFilepath, float paramPitch)
+        public SoundFile(string paramFilepath, float paramPitch)
         {
             filePath = paramFilepath;
             pitch = paramPitch;
         }
     }
 
-    public class AudioSource
+    public class SoundSource
     {
-        private AudioClip clip;
+        private SoundFile clip;
 
         public bool IsPlaying { get; set; }
         public bool IsLooping { get; set; }
         public float Position { get; set; }
 
-        public AudioSource(AudioClip paramClip)
+        public SoundSource(SoundFile paramClip)
         {
             clip = paramClip;
         }

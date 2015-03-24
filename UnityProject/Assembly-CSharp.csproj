@@ -46,15 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Script\Interfaces\IGameControl.cs" />
-     <Compile Include="Assets\Script\Interfaces\IGameModel.cs" />
-     <Compile Include="Assets\Script\Interfaces\IGameView.cs" />
-     <Compile Include="Assets\Script\Metronome.cs" />
-     <Compile Include="Assets\Script\Misc.cs" />
-     <Compile Include="Assets\Script\PianoControl.cs" />
-     <Compile Include="Assets\Script\PianoGame.cs" />
-     <Compile Include="Assets\Script\PlayByEar.cs" />
-     <Compile Include="Assets\Script\View\PianoView.cs" />
+     <Compile Include="Assets\Script\View\KeyboardView.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
@@ -114,6 +106,9 @@
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\ParticleBlend.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.3/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="PianoGame">
+ <HintPath>C:/Users/Brian/Desktop/!school/SENG301/SENG_301_BeatTheBasics/UnityProject/Assets/Plugins/PianoGame.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
