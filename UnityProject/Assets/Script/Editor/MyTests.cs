@@ -11,7 +11,7 @@ internal class GameTests
 {
 	[Test]
 	[Category("Failing Tests")]
-	public void GameKeyboard_PressKeyTest()
+	public void PlayByEar_Test()
 	{
 		throw new Exception("");
 	}
