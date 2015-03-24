@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PianoGame
 {
-    public class Keyboard : IGameModel
+    public class KeyboardModel : IKeyboardModel
     {
         private ArrayList aList = new ArrayList();
         private AudioSource[] audioSources;
@@ -43,8 +43,23 @@ namespace PianoGame
 
         public KeyState[] CurrKeyStates { get { return currKeyStates; } }
         public KeyState[] PrevKeyStates { get { return prevKeyStates; } }
+        
+        public void AddObserver(IKeyboardView paramView)
+        {
+            aList.Add(paramView);
+        }
 
-        public Keyboard()
+        public void RemoveObserver(IKeyboardView paramView)
+        {
+            aList.Remove(paramView);
+        }
+
+        public void NotifyObservers()
+        {
+            foreach (IKeyboardView view in aList)
+                view.Update(this);
+        }
+        public KeyboardModel()
         {
             audioSources = new AudioSource[audioClipList.Length];
             for (int i = 0; i < audioClipList.Length; i++)
@@ -60,7 +75,6 @@ namespace PianoGame
             prevKeyStates[keyIdx] = currKeyStates[keyIdx];
             currKeyStates[keyIdx] = paramState;
             audioSources[keyIdx].IsPlaying = (paramState == KeyState.Pressed) ? true : false;
-            NotifyObservers();
         }
     }
 }

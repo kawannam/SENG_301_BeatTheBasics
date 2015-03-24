@@ -55,9 +55,11 @@
     <Compile Include="source\Game.cs" />
     <Compile Include="source\interfaces\IGameControl.cs" />
     <Compile Include="source\interfaces\IGameModel.cs" />
-    <Compile Include="source\interfaces\IGameView.cs" />
+    <Compile Include="source\interfaces\IKeyboardControl.cs" />
+    <Compile Include="source\interfaces\IControl.cs" />
+    <Compile Include="source\interfaces\IKeyboardModel.cs" />
+    <Compile Include="source\interfaces\IKeyboardView.cs" />
     <Compile Include="source\Misc.cs" />
-    <Compile Include="source\GameControl.cs" />
     <Compile Include="source\Keyboard.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

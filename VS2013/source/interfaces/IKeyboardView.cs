@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace PianoGame
 {
-    public interface IGameView
+    public interface IKeyboardView
     {
         void DisableKeyboard();
         void EnableKeyboard();
-        void Update(IGameModel paramModel);
+        void Update(IKeyboardModel paramModel);
     }
 }

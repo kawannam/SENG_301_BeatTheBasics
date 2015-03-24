@@ -10,7 +10,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Keyboard_PressTest()
         {
-            IGameModel game = new Keyboard();
+            IKeyboardModel game = new KeyboardModel();
             game.InteractPianoKey(PianoKey.H_A, KeyState.Pressed);
 
             KeyState expected = KeyState.Pressed;
@@ -21,7 +21,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Keyboard_ReleaseTest()
         {
-            IGameModel game = new Keyboard();
+            IKeyboardModel game = new KeyboardModel();
             game.CurrKeyStates[(int)PianoKey.H_A] = KeyState.Pressed;
 
             game.InteractPianoKey(PianoKey.H_A, KeyState.Released);
@@ -34,7 +34,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Keyboard_PlayNoteTest()
         {
-            IGameModel game = new Keyboard();
+            IKeyboardModel game = new KeyboardModel();
             game.InteractPianoKey(PianoKey.H_A, KeyState.Pressed);
 
             bool expected = true;
@@ -45,7 +45,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Keyboard_StopNoteTest()
         {
-            IGameModel game = new Keyboard();
+            IKeyboardModel game = new KeyboardModel();
             game.AudioSources[(int)PianoKey.H_A].IsPlaying = true;
             game.InteractPianoKey(PianoKey.H_A, KeyState.Released);
 
