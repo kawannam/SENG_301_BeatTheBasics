@@ -37,9 +37,9 @@ public enum PianoKey
 	MAX
 }
 
-public class PianoKeyboard : MonoBehaviour  
+public class PianoKeyboardScript : MonoBehaviour  
 {
-	public List<AudioClip> clipList = new List<AudioClip>();
+	private AudioClip[] clipList;
 	public List<AudioSource> sourceList = new List<AudioSource>();
 	private KeyState[] currKeyStates = new KeyState[(int)PianoKey.MAX];
 	private KeyState[] prevKeyStates = new KeyState[(int)PianoKey.MAX];
@@ -48,6 +48,33 @@ public class PianoKeyboard : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		clipList = new AudioClip[]{
+			Resources.Load<AudioClip>("Sounds/piano/LC"),
+			Resources.Load<AudioClip>("Sounds/piano/LCs"),
+			Resources.Load<AudioClip>("Sounds/piano/LD"),
+			Resources.Load<AudioClip>("Sounds/piano/LDs"),
+			Resources.Load<AudioClip>("Sounds/piano/LE"),
+			Resources.Load<AudioClip>("Sounds/piano/LF"),
+			Resources.Load<AudioClip>("Sounds/piano/LFs"),
+			Resources.Load<AudioClip>("Sounds/piano/LG"),
+			Resources.Load<AudioClip>("Sounds/piano/LGs"),
+			Resources.Load<AudioClip>("Sounds/piano/LA"),
+			Resources.Load<AudioClip>("Sounds/piano/LAs"),
+			Resources.Load<AudioClip>("Sounds/piano/LB"),
+			Resources.Load<AudioClip>("Sounds/piano/HC"),
+			Resources.Load<AudioClip>("Sounds/piano/HCs"),
+			Resources.Load<AudioClip>("Sounds/piano/HD"),
+			Resources.Load<AudioClip>("Sounds/piano/HDs"),
+			Resources.Load<AudioClip>("Sounds/piano/HE"),
+			Resources.Load<AudioClip>("Sounds/piano/HF"),
+			Resources.Load<AudioClip>("Sounds/piano/HFs"),
+			Resources.Load<AudioClip>("Sounds/piano/HG"),
+			Resources.Load<AudioClip>("Sounds/piano/HGs"),
+			Resources.Load<AudioClip>("Sounds/piano/HA"),
+			Resources.Load<AudioClip>("Sounds/piano/HAs"),
+			Resources.Load<AudioClip>("Sounds/piano/HB")
+		};
+
 		binding[(int)PianoKey.L_C]  = KeyCode.Q;
 		binding[(int)PianoKey.L_Cs] = KeyCode.Alpha2;
 		binding[(int)PianoKey.L_D]  = KeyCode.W;
@@ -82,7 +109,7 @@ public class PianoKeyboard : MonoBehaviour
 			sourceList.Add(source);
 		}
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -98,5 +125,10 @@ public class PianoKeyboard : MonoBehaviour
 			if (ks == KeyState.Released && sourceList[i].isPlaying)
 				sourceList[i].Stop();
 		}
+	}	
+	
+	public KeyState GetPianoKeyState(PianoKey paramKey)
+	{
+		return currKeyStates[(int)paramKey];
 	}
 }
