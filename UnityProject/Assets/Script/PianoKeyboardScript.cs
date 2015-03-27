@@ -133,6 +133,9 @@ public class PianoKeyboardScript : MonoBehaviour
 			if (Input.GetKey(key) || keyScripts[i].pressed) 
 				ks = KeyState.Pressed;
 
+			if (!Input.anyKey && !Input.GetMouseButton(0))
+				ks = KeyState.Released;
+
 			currKeyStates[i] = ks;
 
 			if (ks == KeyState.Pressed && !sourceList[i].isPlaying)
