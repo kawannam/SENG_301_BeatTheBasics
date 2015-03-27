@@ -7,7 +7,8 @@ public class PlayByEarScript : MonoBehaviour {
 	public enum State
 	{
 		Countdown,
-		Listen,
+		Listen,		
+		Prompt,
 		Playback,
 		Results
 	}
@@ -19,6 +20,8 @@ public class PlayByEarScript : MonoBehaviour {
 	PianoKey randomKey;
 	float countdown;
 	public Text text;
+	public GameObject menu_1; 
+	public GameObject menu_2; 
 
 	// Use this for initialization
 	void Start () 
@@ -49,9 +52,6 @@ public class PlayByEarScript : MonoBehaviour {
 			Resources.Load<AudioClip>("Sounds/piano/HAs"),
 			Resources.Load<AudioClip>("Sounds/piano/HB")
 		};
-		int rand = (int)(Random.value * audioClips.Length); 
-		randomKey = (PianoKey)rand;
-		source.clip = audioClips[rand];
 		ChangeState(State.Countdown);
 	}
 
@@ -62,21 +62,61 @@ public class PlayByEarScript : MonoBehaviour {
 		switch(state)
 		{
 		case State.Countdown:
+			menu_1.SetActive(false);
+			menu_2.SetActive(false);
+
+			int rand = (int)(Random.value * audioClips.Length); 
+			randomKey = (PianoKey)rand;
+			source.clip = audioClips[rand];
+
 			countdown = 3;
 			break;
 		case State.Listen:
+			menu_1.SetActive(false);
+			menu_2.SetActive(false);
 			source.Play();
 			break;
+		case State.Prompt:
+			menu_1.SetActive(true);
+			menu_2.SetActive(false);
+			break;
 		case State.Playback:
+			menu_1.SetActive(false);
+			menu_2.SetActive(false);
 			if (piano.GetPianoKeyState(randomKey) == KeyState.Pressed)
 				ChangeState(State.Results);
 			break;
 		case State.Results:
+			menu_1.SetActive(false);
+			menu_2.SetActive(true);
 			break;
 		}
-
+	}
+	
+	public void OnReady()
+	{
+		ChangeState(State.Playback);
+	}
+	
+	public void OnListen()
+	{
+		ChangeState(State.Listen);
+	}
+	
+	public void OnReplay()
+	{
+		ChangeState(State.Listen);
+	}
+	
+	public void OnNext()
+	{
+		ChangeState(State.Countdown);
 	}
 
+	public void OnMenu()
+	{
+	}
+	
 	void Update () 
 	{
 		switch(state)
@@ -90,7 +130,9 @@ public class PlayByEarScript : MonoBehaviour {
 			case State.Listen:
 				text.enabled = false;
 				if (!source.isPlaying)
-					ChangeState(State.Playback);
+					ChangeState(State.Prompt);
+				break;
+			case State.Prompt:
 				break;
 			case State.Playback:
 				text.enabled = true;
@@ -102,10 +144,5 @@ public class PlayByEarScript : MonoBehaviour {
 			text.text = "Correct!";
 				break;
 		}
-	}
-
-	void Draw()
-	{
-
 	}
 }
