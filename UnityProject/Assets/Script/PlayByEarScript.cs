@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayByEarScript : MonoBehaviour {
@@ -17,6 +18,7 @@ public class PlayByEarScript : MonoBehaviour {
 	public PianoKeyboardScript piano;
 	PianoKey randomKey;
 	float countdown;
+	public Text text;
 
 	// Use this for initialization
 	void Start () 
@@ -50,6 +52,7 @@ public class PlayByEarScript : MonoBehaviour {
 		int rand = (int)(Random.value * audioClips.Length); 
 		randomKey = (PianoKey)rand;
 		source.clip = audioClips[rand];
+		ChangeState(State.Countdown);
 	}
 
 	void ChangeState(State paramState)
@@ -80,18 +83,23 @@ public class PlayByEarScript : MonoBehaviour {
 		{
 			case State.Countdown:
 				countdown -= Time.deltaTime;
+				text.text = ((int)countdown + 1).ToString();
 				if (countdown <= 0)
 					ChangeState(State.Listen);
 				break;
 			case State.Listen:
+				text.enabled = false;
 				if (!source.isPlaying)
 					ChangeState(State.Playback);
 				break;
 			case State.Playback:
+				text.enabled = true;
+				text.text = "Which note did you hear?";
 				if (piano.GetPianoKeyState(randomKey) == KeyState.Pressed)
 					ChangeState(State.Results);
 				break;
-			case State.Results:
+		case State.Results:
+			text.text = "Correct!";
 				break;
 		}
 	}

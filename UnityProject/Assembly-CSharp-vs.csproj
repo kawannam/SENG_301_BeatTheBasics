@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\PianoKeyScript.cs" />
      <Compile Include="Assets\Script\PianoKeyboardScript.cs" />
      <Compile Include="Assets\Script\PlayByEarScript.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />

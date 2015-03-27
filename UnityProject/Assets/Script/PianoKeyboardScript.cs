@@ -39,15 +39,27 @@ public enum PianoKey
 
 public class PianoKeyboardScript : MonoBehaviour  
 {
+	const int NUM_KEYS = 24;
 	private AudioClip[] clipList;
-	public List<AudioSource> sourceList = new List<AudioSource>();
+	private List<AudioSource> sourceList = new List<AudioSource>();
 	private KeyState[] currKeyStates = new KeyState[(int)PianoKey.MAX];
 	private KeyState[] prevKeyStates = new KeyState[(int)PianoKey.MAX];
 	private KeyCode[] binding = new KeyCode[(int)PianoKey.MAX];
+	public PianoKeyScript[] keyScripts;
 
 	// Use this for initialization
 	void Start () 
 	{
+		keyScripts = new PianoKeyScript[NUM_KEYS];
+
+		Transform keysGrp = transform.FindChild("keysGrp");
+		for (int i = 0; i < keysGrp.transform.childCount; i++)
+		{
+			Transform child = keysGrp.transform.GetChild(i);		
+			PianoKeyScript pks = child.gameObject.AddComponent<PianoKeyScript>();
+			keyScripts[i] = pks;
+		}
+
 		clipList = new AudioClip[]{
 			Resources.Load<AudioClip>("Sounds/piano/LC"),
 			Resources.Load<AudioClip>("Sounds/piano/LCs"),
@@ -117,7 +129,11 @@ public class PianoKeyboardScript : MonoBehaviour
 		{
 			KeyCode key = binding[i];
 			prevKeyStates[i] = currKeyStates[i];
-			currKeyStates[i] = Input.GetKey(key) ? KeyState.Pressed : KeyState.Released;
+			KeyState keyState = KeyState.Released;
+			if (Input.GetKey(key) || keyScripts[i].pressed) 
+				keyState = KeyState.Pressed;
+
+			currKeyStates[i] = keyState;
 
 			KeyState ks = currKeyStates[i];
 			if (ks == KeyState.Pressed && !sourceList[i].isPlaying)
