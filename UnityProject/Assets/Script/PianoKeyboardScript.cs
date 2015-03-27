@@ -129,13 +129,12 @@ public class PianoKeyboardScript : MonoBehaviour
 		{
 			KeyCode key = binding[i];
 			prevKeyStates[i] = currKeyStates[i];
-			KeyState keyState = KeyState.Released;
+			KeyState ks = KeyState.Released;
 			if (Input.GetKey(key) || keyScripts[i].pressed) 
-				keyState = KeyState.Pressed;
+				ks = KeyState.Pressed;
 
-			currKeyStates[i] = keyState;
+			currKeyStates[i] = ks;
 
-			KeyState ks = currKeyStates[i];
 			if (ks == KeyState.Pressed && !sourceList[i].isPlaying)
 				sourceList[i].Play();
 			if (ks == KeyState.Released && sourceList[i].isPlaying)
