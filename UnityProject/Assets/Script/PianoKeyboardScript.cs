@@ -56,8 +56,8 @@ public class PianoKeyboardScript : MonoBehaviour
 		for (int i = 0; i < keysGrp.transform.childCount; i++)
 		{
 			Transform child = keysGrp.transform.GetChild(i);		
-			PianoKeyScript pks = child.gameObject.AddComponent<PianoKeyScript>();
-			keyScripts[i] = pks;
+			PianoKeyScript key = child.gameObject.AddComponent<PianoKeyScript>();
+			keyScripts[i] = key;
 		}
 
 		clipList = new AudioClip[]{
