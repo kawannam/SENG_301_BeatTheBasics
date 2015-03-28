@@ -39,6 +39,8 @@ public enum PianoKey
 public static class Constants
 {	
 	public const int PIANO_NUM_KEYS = 24;
+	public static int MAX_BPM = 240;
+	public static int MIN_BPM = 1;
 
 	public static string[] PIANO_SOUND_FILES = new string[]{
 			"Sounds/piano2/piano.mf.C3",
