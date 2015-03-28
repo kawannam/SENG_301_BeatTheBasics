@@ -46,9 +46,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\Constants.cs" />
      <Compile Include="Assets\Script\PianoKeyScript.cs" />
      <Compile Include="Assets\Script\PianoKeyboardScript.cs" />
      <Compile Include="Assets\Script\PlayByEarScript.cs" />
+     <Compile Include="Assets\Script\SheetMusicDisplayScript.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />

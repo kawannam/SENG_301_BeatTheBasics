@@ -1,58 +1,58 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
-public class PlayByEarScript : MonoBehaviour {
+public interface PianoKeyboardObserver
+{
+	void OnPianoKeyDown(PianoKey paramKey);
+}
+
+public class PlayByEarScript : MonoBehaviour, PianoKeyboardObserver {
 
 	public enum State
 	{
+		Init,
 		Countdown,
 		Listen,		
-		Prompt,
-		Playback,
+		Input,
 		Results
 	}
 
+	public int NUM_OF_NOTES = 3;
+	private const float NOTE_DURATION = 0.5f;
 	public AudioClip[] audioClips;
 	public AudioSource source;
 	public State state;
 	public PianoKeyboardScript piano;
-	PianoKey randomKey;
-	float countdown;
-	public Text text;
+	public Text upperText;
+	public Text lowerText;
 	public GameObject menu_1; 
 	public GameObject menu_2; 
+	public float countdown;
+
+	public SheetMusicDisplayScript sheetMusic;
+
+	// tune playing
+	public PianoKey[] songKeys;
+	public int songIdx;
+	public float songTimer;
+
+	// user input
+	public PianoKey[] inputKeys;
+	public int inputIdx;
+
+	// results 
+	public int resultsPoints;
 
 	// Use this for initialization
 	void Start () 
-	{		
-		audioClips = new AudioClip[]{
-			Resources.Load<AudioClip>("Sounds/piano/LC"),
-			Resources.Load<AudioClip>("Sounds/piano/LCs"),
-			Resources.Load<AudioClip>("Sounds/piano/LD"),
-			Resources.Load<AudioClip>("Sounds/piano/LDs"),
-			Resources.Load<AudioClip>("Sounds/piano/LE"),
-			Resources.Load<AudioClip>("Sounds/piano/LF"),
-			Resources.Load<AudioClip>("Sounds/piano/LFs"),
-			Resources.Load<AudioClip>("Sounds/piano/LG"),
-			Resources.Load<AudioClip>("Sounds/piano/LGs"),
-			Resources.Load<AudioClip>("Sounds/piano/LA"),
-			Resources.Load<AudioClip>("Sounds/piano/LAs"),
-			Resources.Load<AudioClip>("Sounds/piano/LB"),
-			Resources.Load<AudioClip>("Sounds/piano/HC"),
-			Resources.Load<AudioClip>("Sounds/piano/HCs"),
-			Resources.Load<AudioClip>("Sounds/piano/HD"),
-			Resources.Load<AudioClip>("Sounds/piano/HDs"),
-			Resources.Load<AudioClip>("Sounds/piano/HE"),
-			Resources.Load<AudioClip>("Sounds/piano/HF"),
-			Resources.Load<AudioClip>("Sounds/piano/HFs"),
-			Resources.Load<AudioClip>("Sounds/piano/HG"),
-			Resources.Load<AudioClip>("Sounds/piano/HGs"),
-			Resources.Load<AudioClip>("Sounds/piano/HA"),
-			Resources.Load<AudioClip>("Sounds/piano/HAs"),
-			Resources.Load<AudioClip>("Sounds/piano/HB")
-		};
-		ChangeState(State.Countdown);
+	{					
+		audioClips = new AudioClip[Constants.PIANO_NUM_KEYS];
+		for (int i = 0; i < Constants.PIANO_NUM_KEYS; i++)
+			audioClips[i] = Resources.Load<AudioClip>(Constants.PIANO_SOUND_FILES[i]);
+	
+		ChangeState(State.Init);
 	}
 
 	void ChangeState(State paramState)
@@ -61,41 +61,82 @@ public class PlayByEarScript : MonoBehaviour {
 
 		switch(state)
 		{
-		case State.Countdown:
+		case State.Init:
 			menu_1.SetActive(false);
 			menu_2.SetActive(false);
-
-			int rand = (int)(Random.value * audioClips.Length); 
-			randomKey = (PianoKey)rand;
-			source.clip = audioClips[rand];
-
+			songKeys = new PianoKey[NUM_OF_NOTES];
+			for (int i = 0; i < NUM_OF_NOTES; i++)
+			{
+				int rand = (int)(Random.value * Constants.PIANO_NUM_KEYS); 
+				songKeys[i] = (PianoKey)rand;
+			}
+			/*songKeys[0] = PianoKey.H_A;
+			songKeys[1] = PianoKey.H_As;
+			songKeys[2] = PianoKey.H_B;*/
+			ChangeState(State.Countdown);
+			break;
+		case State.Countdown:
+			sheetMusic.Reset();
+			lowerText.enabled = true;
+			upperText.enabled = true;
+			menu_1.SetActive(false);
+			menu_2.SetActive(false);
+			upperText.text = "Get Ready";
 			countdown = 3;
 			break;
 		case State.Listen:
+			upperText.text = "Listen to the notes";
+			upperText.enabled = true;
+			lowerText.enabled = false;
 			menu_1.SetActive(false);
 			menu_2.SetActive(false);
-			source.Play();
+			songIdx = 0;
+			songTimer = 0;
 			break;
-		case State.Prompt:
+		case State.Input:
+			upperText.text = "Which notes did you hear?";
+			lowerText.enabled = false;
+			upperText.enabled = true;
+			piano.observers.Add(this);
 			menu_1.SetActive(true);
 			menu_2.SetActive(false);
-			break;
-		case State.Playback:
-			menu_1.SetActive(false);
-			menu_2.SetActive(false);
-			if (piano.GetPianoKeyState(randomKey) == KeyState.Pressed)
-				ChangeState(State.Results);
+			inputKeys = new PianoKey[songKeys.Length];
+			inputIdx = 0;
+			resultsPoints = 0;
 			break;
 		case State.Results:
 			menu_1.SetActive(false);
 			menu_2.SetActive(true);
+
+			upperText.enabled = false;
+			lowerText.enabled = true;
 			break;
 		}
 	}
-	
+
+	public void OnPianoKeyDown(PianoKey paramKey)
+	{
+		switch(state)
+		{
+		case State.Input:
+			Color noteClr = Color.red;
+
+			inputKeys[inputIdx] = paramKey;
+			if (inputKeys[inputIdx] == songKeys[inputIdx])
+			{
+				noteClr = Color.green;
+				resultsPoints++;
+			}
+			lowerText.text = resultsPoints.ToString() + " correct!";
+			sheetMusic.AddNote(new SheetMusicNote(NoteType.Half, paramKey), noteClr);
+			inputIdx++;
+			break;
+		}
+	}
+
 	public void OnReady()
 	{
-		ChangeState(State.Playback);
+		ChangeState(State.Input);
 	}
 	
 	public void OnListen()
@@ -105,12 +146,12 @@ public class PlayByEarScript : MonoBehaviour {
 	
 	public void OnReplay()
 	{
-		ChangeState(State.Listen);
+		ChangeState(State.Countdown);
 	}
 	
 	public void OnNext()
 	{
-		ChangeState(State.Countdown);
+		ChangeState(State.Init);
 	}
 
 	public void OnMenu()
@@ -121,28 +162,34 @@ public class PlayByEarScript : MonoBehaviour {
 	{
 		switch(state)
 		{
-			case State.Countdown:
-				countdown -= Time.deltaTime;
-				text.text = ((int)countdown + 1).ToString();
-				if (countdown <= 0)
-					ChangeState(State.Listen);
-				break;
-			case State.Listen:
-				text.enabled = false;
-				if (!source.isPlaying)
-					ChangeState(State.Prompt);
-				break;
-			case State.Prompt:
-				break;
-			case State.Playback:
-				text.enabled = true;
-				text.text = "Which note did you hear?";
-				if (piano.GetPianoKeyState(randomKey) == KeyState.Pressed)
-					ChangeState(State.Results);
-				break;
+		case State.Countdown:
+			countdown -= Time.deltaTime;
+			lowerText.text = ((int)countdown + 1).ToString();
+			if (countdown <= 0)
+				ChangeState(State.Listen);
+			break;
+		case State.Listen:
+			if (songIdx < NUM_OF_NOTES && songTimer <= 0)
+			{
+				source.Stop();
+				int keyIdx = (int)songKeys[songIdx];
+				source.clip = audioClips[keyIdx]; 
+				source.Play();
+				songTimer = NOTE_DURATION;
+				songIdx++;
+			}
+			songTimer -= Time.deltaTime;
+			if (songIdx >= NUM_OF_NOTES && songTimer <= -2)
+				ChangeState(State.Input);
+			break;
+		case State.Input:
+			if (inputIdx >= songKeys.Length)
+				ChangeState(State.Results);
+			break;
 		case State.Results:
-			text.text = "Correct!";
-				break;
+			if (piano.observers.Contains(this))
+				piano.observers.Remove(this);
+			break;
 		}
 	}
 }
