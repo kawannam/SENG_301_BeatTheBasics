@@ -15,7 +15,6 @@ public class SheetMusicNote
 {
 	public NoteType type;
 	public PianoKey key;
-	public float position;
 
 	public float Duration
 	{
@@ -24,11 +23,12 @@ public class SheetMusicNote
 			return (float)(Math.Pow(2, -((int)type))); 
 		}
 	}
-}
 
-public class SheetMusic
-{
-	List<SheetMusicNote> notes;
+	public SheetMusicNote(NoteType paramType, PianoKey paramKey)
+	{
+		type = paramType;
+		key = paramKey;
+	}
 }
 
 public class SheetMusicDisplayScript : MonoBehaviour {
@@ -36,8 +36,8 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 	const float BAR_WIDTH = 300;
 	const float LINE_HEIGHT = 16;
 	public Transform noteGrp;
-	
-	public SheetMusicNote[] notes;
+	public List<GameObject> noteObjects = new List<GameObject>();
+	public List<SheetMusicNote> notes = new List<SheetMusicNote>();
 	private string[] prefabs = new string[]{
 		"Prefabs/SheetMusic/wholeNote",
 		"Prefabs/SheetMusic/halfNote",
@@ -71,56 +71,65 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 		198,	// bb
 		198		// bb
 	};
+	
+	private float x_offset = BAR_WIDTH / 8;
 
-	// Use this for initialization
-	void Start () {
-		float x_offset = BAR_WIDTH / 8;
-		for (int i = 0; i < notes.Length; i++)
-		{
-			SheetMusicNote note = notes[i];
-			GameObject g = null;
-			Vector3 pos;
+	public void Reset()
+	{
+		foreach(GameObject go in noteObjects)
+			GameObject.Destroy(go);
 
-			g = Resources.Load<GameObject>(prefabs[(int)notes[i].type]);			
+		x_offset = BAR_WIDTH / 8;
+		notes.Clear();
+	}
+
+	public void AddNote(SheetMusicNote paramNote, Color paramColor)
+	{
+		notes.Add(paramNote);
+
+		GameObject g = null;
+		Vector3 pos;
+		
+		g = Resources.Load<GameObject>(prefabs[(int)paramNote.type]);			
+		g = (GameObject)GameObject.Instantiate(g);
+		g.transform.parent = noteGrp;
+		pos = Vector3.zero;
+		pos.x = x_offset;
+		pos.y = y_offs[(int)paramNote.key];
+		g.transform.localPosition = pos;
+		g.transform.localScale = Vector3.one;
+		SpriteRenderer renderer = g.GetComponent<SpriteRenderer>();
+		renderer.color = paramColor;
+		noteObjects.Add(g);
+		
+		switch(paramNote.key)
+		{	
+		case PianoKey.L_Cs:
+		case PianoKey.L_Ds:
+		case PianoKey.L_Fs:
+		case PianoKey.L_Gs:
+		case PianoKey.L_As:
+		case PianoKey.H_As:
+		case PianoKey.H_Cs:
+		case PianoKey.H_Ds:
+		case PianoKey.H_Fs:
+		case PianoKey.H_Gs:
+			g = Resources.Load<GameObject>(prefabs[3]);
 			g = (GameObject)GameObject.Instantiate(g);
 			g.transform.parent = noteGrp;
 			pos = Vector3.zero;
 			pos.x = x_offset;
-			pos.y = y_offs[(int)note.key];
+			pos.y = y_offs[(int)paramNote.key];
 			g.transform.localPosition = pos;
 			g.transform.localScale = Vector3.one;
-
-			switch(note.key)
-			{	
-			case PianoKey.L_Cs:
-			case PianoKey.L_Ds:
-			case PianoKey.L_Fs:
-			case PianoKey.L_Gs:
-			case PianoKey.L_As:
-			case PianoKey.H_As:
-			case PianoKey.H_Cs:
-			case PianoKey.H_Ds:
-			case PianoKey.H_Fs:
-			case PianoKey.H_Gs:
-				g = Resources.Load<GameObject>(prefabs[3]);
-				g = (GameObject)GameObject.Instantiate(g);
-				g.transform.parent = noteGrp;
-				pos = Vector3.zero;
-				pos.x = x_offset;
-				pos.y = y_offs[(int)note.key];
-				g.transform.localPosition = pos;
-				g.transform.localScale = Vector3.one;
-				break;
-			default:
-				break;
-			}
-
-			x_offset += BAR_WIDTH * note.Duration;
+			noteObjects.Add(g);
+			renderer = g.GetComponent<SpriteRenderer>();
+			renderer.color = paramColor;
+			break;
+		default:
+			break;
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		
+		x_offset += BAR_WIDTH * paramNote.Duration;
 	}
 }

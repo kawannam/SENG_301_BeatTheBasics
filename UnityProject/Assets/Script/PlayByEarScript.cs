@@ -8,27 +8,30 @@ public interface PianoKeyboardObserver
 	void OnPianoKeyDown(PianoKey paramKey);
 }
 
-public class PlayByEarHardScript : MonoBehaviour, PianoKeyboardObserver {
+public class PlayByEarScript : MonoBehaviour, PianoKeyboardObserver {
 
 	public enum State
 	{
 		Init,
 		Countdown,
 		Listen,		
-		WaitReady,
 		Input,
 		Results
 	}
-	private const int NUM_OF_NOTES = 3;
+
+	public int NUM_OF_NOTES = 3;
 	private const float NOTE_DURATION = 0.5f;
 	public AudioClip[] audioClips;
 	public AudioSource source;
 	public State state;
 	public PianoKeyboardScript piano;
-	public Text text;
+	public Text upperText;
+	public Text lowerText;
 	public GameObject menu_1; 
 	public GameObject menu_2; 
 	public float countdown;
+
+	public SheetMusicDisplayScript sheetMusic;
 
 	// tune playing
 	public PianoKey[] songKeys;
@@ -40,8 +43,6 @@ public class PlayByEarHardScript : MonoBehaviour, PianoKeyboardObserver {
 	public int inputIdx;
 
 	// results 
-	public float resultsTimer;
-	public int resultsIdx;
 	public int resultsPoints;
 
 	// Use this for initialization
@@ -69,44 +70,46 @@ public class PlayByEarHardScript : MonoBehaviour, PianoKeyboardObserver {
 				int rand = (int)(Random.value * Constants.PIANO_NUM_KEYS); 
 				songKeys[i] = (PianoKey)rand;
 			}
-			songKeys[0] = PianoKey.H_A;
+			/*songKeys[0] = PianoKey.H_A;
 			songKeys[1] = PianoKey.H_As;
-			songKeys[2] = PianoKey.H_B;
+			songKeys[2] = PianoKey.H_B;*/
 			ChangeState(State.Countdown);
 			break;
 		case State.Countdown:
+			sheetMusic.Reset();
+			lowerText.enabled = true;
+			upperText.enabled = true;
 			menu_1.SetActive(false);
 			menu_2.SetActive(false);
+			upperText.text = "Get Ready";
 			countdown = 3;
 			break;
 		case State.Listen:
-			text.enabled = false;
+			upperText.text = "Listen to the notes";
+			upperText.enabled = true;
+			lowerText.enabled = false;
 			menu_1.SetActive(false);
 			menu_2.SetActive(false);
 			songIdx = 0;
 			songTimer = 0;
 			break;
-		case State.WaitReady:
-			menu_1.SetActive(true);
-			menu_2.SetActive(false);
-			break;
 		case State.Input:
-			text.text = "Which note did you hear?";
+			upperText.text = "Which notes did you hear?";
+			lowerText.enabled = false;
+			upperText.enabled = true;
 			piano.observers.Add(this);
-			menu_1.SetActive(false);
+			menu_1.SetActive(true);
 			menu_2.SetActive(false);
 			inputKeys = new PianoKey[songKeys.Length];
 			inputIdx = 0;
+			resultsPoints = 0;
 			break;
 		case State.Results:
-			piano.observers.Remove(this);
 			menu_1.SetActive(false);
 			menu_2.SetActive(true);
 
-			resultsTimer = 0;
-			resultsIdx = 0;
-			resultsPoints = 0;
-			text.enabled = true;
+			upperText.enabled = false;
+			lowerText.enabled = true;
 			break;
 		}
 	}
@@ -116,10 +119,17 @@ public class PlayByEarHardScript : MonoBehaviour, PianoKeyboardObserver {
 		switch(state)
 		{
 		case State.Input:
+			Color noteClr = Color.red;
+
 			inputKeys[inputIdx] = paramKey;
+			if (inputKeys[inputIdx] == songKeys[inputIdx])
+			{
+				noteClr = Color.green;
+				resultsPoints++;
+			}
+			lowerText.text = resultsPoints.ToString() + " correct!";
+			sheetMusic.AddNote(new SheetMusicNote(NoteType.Half, paramKey), noteClr);
 			inputIdx++;
-			if (inputIdx >= songKeys.Length)
-				ChangeState(State.Results);
 			break;
 		}
 	}
@@ -154,7 +164,7 @@ public class PlayByEarHardScript : MonoBehaviour, PianoKeyboardObserver {
 		{
 		case State.Countdown:
 			countdown -= Time.deltaTime;
-			text.text = ((int)countdown + 1).ToString();
+			lowerText.text = ((int)countdown + 1).ToString();
 			if (countdown <= 0)
 				ChangeState(State.Listen);
 			break;
@@ -170,22 +180,15 @@ public class PlayByEarHardScript : MonoBehaviour, PianoKeyboardObserver {
 			}
 			songTimer -= Time.deltaTime;
 			if (songIdx >= NUM_OF_NOTES && songTimer <= -2)
-				ChangeState(State.WaitReady);
-			break;
-		case State.WaitReady:
+				ChangeState(State.Input);
 			break;
 		case State.Input:
+			if (inputIdx >= songKeys.Length)
+				ChangeState(State.Results);
 			break;
 		case State.Results:
-			if (resultsTimer >= NOTE_DURATION && resultsIdx < NUM_OF_NOTES)
-			{
-				if (songKeys[resultsIdx] == inputKeys[resultsIdx])
-					resultsPoints++;
-				resultsTimer = 0;
-				resultsIdx++;
-			}
-			resultsTimer += Time.deltaTime;
-			text.text = resultsPoints.ToString() + " correct!";
+			if (piano.observers.Contains(this))
+				piano.observers.Remove(this);
 			break;
 		}
 	}
