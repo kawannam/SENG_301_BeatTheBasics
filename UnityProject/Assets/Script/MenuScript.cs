@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class MenuScript : MonoBehaviour {
+public class MenuScript : GameModeScript {
 
 	string[] text = new string[]{
 		"TABLE OF CONTENTS",
@@ -21,6 +21,11 @@ public class MenuScript : MonoBehaviour {
 	void Start () 
 	{
 		OnPrevNext(0);
+	}
+
+	public void SetGameManager(IGameManagerScript paramGame)
+	{
+		gameManager = paramGame;
 	}
 
 	public void OnPrevNext(int paramDir)
@@ -43,6 +48,7 @@ public class MenuScript : MonoBehaviour {
 		case 0:
 			break;
 		case 1:
+			gameManager.ChangeState(GameManagerState.PlayByEar);
 			break;
 		case 4:
 			break;

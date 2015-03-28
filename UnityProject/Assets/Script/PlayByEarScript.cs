@@ -8,7 +8,7 @@ public interface PianoKeyboardObserver
 	void OnPianoKeyDown(PianoKey paramKey);
 }
 
-public class PlayByEarScript : MonoBehaviour, PianoKeyboardObserver {
+public class PlayByEarScript : GameModeScript, PianoKeyboardObserver {
 
 	public enum State
 	{
@@ -18,9 +18,10 @@ public class PlayByEarScript : MonoBehaviour, PianoKeyboardObserver {
 		Input,
 		Results
 	}
+	
+	private const float NOTE_DURATION = 0.5f;
 
 	public int NUM_OF_NOTES = 3;
-	private const float NOTE_DURATION = 0.5f;
 	public AudioClip[] audioClips;
 	public AudioSource source;
 	public State state;
@@ -51,6 +52,7 @@ public class PlayByEarScript : MonoBehaviour, PianoKeyboardObserver {
 	void Start () 
 	{			
 		piano = GameObject.FindGameObjectWithTag("PianoKeyBoard").GetComponent<PianoKeyboardScript>();
+		piano.observers.Add(this);
 		audioClips = new AudioClip[Constants.PIANO_NUM_KEYS];
 		for (int i = 0; i < Constants.PIANO_NUM_KEYS; i++)
 			audioClips[i] = Resources.Load<AudioClip>(Constants.PIANO_SOUND_FILES[i]);
@@ -100,7 +102,6 @@ public class PlayByEarScript : MonoBehaviour, PianoKeyboardObserver {
 			upperText.text = "Which notes did you hear?";
 			lowerText.enabled = false;
 			upperText.enabled = true;
-			piano.observers.Add(this);
 			menu_1.SetActive(true);
 			menu_2.SetActive(false);
 			inputKeys = new PianoKey[songKeys.Length];
@@ -159,6 +160,8 @@ public class PlayByEarScript : MonoBehaviour, PianoKeyboardObserver {
 
 	public void OnMenu()
 	{
+		piano.observers.Remove(this);
+		gameManager.ChangeState(GameManagerState.Menu);
 	}
 	
 	void Update () 
@@ -190,8 +193,6 @@ public class PlayByEarScript : MonoBehaviour, PianoKeyboardObserver {
 				ChangeState(State.Results);
 			break;
 		case State.Results:
-			if (piano.observers.Contains(this))
-				piano.observers.Remove(this);
 			break;
 		}
 	}
