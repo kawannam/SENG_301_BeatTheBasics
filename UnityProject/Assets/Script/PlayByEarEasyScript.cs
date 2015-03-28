@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class PlayByEarScript : MonoBehaviour {
+public class PlayByEarEasyScript : MonoBehaviour {
 
 	public enum State
 	{
