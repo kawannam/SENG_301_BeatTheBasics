@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BackToMenu.cs" />
      <Compile Include="Assets\Resources\Textures\StickerBook\StickerBookStuff.cs" />
      <Compile Include="Assets\Script\Constants.cs" />
      <Compile Include="Assets\Script\DifficultyMenuScript.cs" />
