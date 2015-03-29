@@ -3,8 +3,8 @@ using System.Collections;
 
 public class DifficultyMenuScript : GameModeScript {
 
-	public void OnSelect(Difficulty paramDiff)
+	public void OnSelect(int paramDiff)
 	{
-		gameManager.ChangeState(GameManagerState.DifficultyDone);
+		gameManager.OnDifficultySelect((Difficulty)paramDiff);
 	}
 }
