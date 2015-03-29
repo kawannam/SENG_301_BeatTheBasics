@@ -14,7 +14,7 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 		Results
 	}
 	
-	private const float NOTE_DURATION = 0.5f;
+	private const float NOTE_DURATION = 1f;
 
 	public int NUM_OF_NOTES = 3;
 	public AudioClip[] audioClips;
@@ -45,7 +45,20 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 
 	// Use this for initialization
 	void Start () 
-	{			
+	{		
+		switch (difficulty)
+		{
+		case Difficulty.Easy:
+			NUM_OF_NOTES = 1;
+			break;
+		case Difficulty.Medium:
+			NUM_OF_NOTES = 2;
+			break;
+		case Difficulty.Hard:
+			NUM_OF_NOTES = 3;
+			break;
+		}
+
 		piano = GameObject.FindGameObjectWithTag("PianoKeyBoard").GetComponent<PianoKeyboardScript>();
 		piano.observers.Add(this);
 		audioClips = new AudioClip[Constants.PIANO_NUM_KEYS];
@@ -127,7 +140,7 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 				resultsPoints++;
 			}
 			lowerText.text = resultsPoints.ToString() + " correct!";
-			sheetMusic.AddNote(new SheetMusicNote(NoteType.Half, paramKey), noteClr);
+			sheetMusic.AddNote(new SheetMusicNote(NoteType.Whole, paramKey), noteClr);
 			inputIdx++;
 			break;
 		}

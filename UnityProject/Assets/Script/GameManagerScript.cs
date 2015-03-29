@@ -5,6 +5,7 @@ public interface IGameManagerScript
 {
 	PianoKeyboardScript GetKeyboard();
 	void ChangeState(GameManagerState paramState);
+	void OnDifficultySelect(Difficulty paramDiff);
 }
 
 public enum Difficulty
@@ -18,22 +19,27 @@ public enum GameManagerState
 {
 	StartUp,
 	Menu,
+	TableOfContents,
 	FreePlay,
 	PlayByEar,
-	ChooseDifficulty,
-	DifficultyDone
+	RhythmTutor,
+	SightReading,
+	Metronome,
+	StickerBook
 }
 
 public class GameManagerScript : MonoBehaviour, IGameManagerScript 
 {
 	private GameManagerState state;
-	private GameManagerState nextState;
-	private Difficulty difficulty;
+	private DifficultyMenuScript difficultyMenu;
 
 	public GameObject pianoPrefab;
 	public GameObject menuPrefab;
-	public GameObject playByEarPrefab;
 	public GameObject difficultyPrefab;
+	// game mode prefabs
+	public GameObject playByEarPrefab;
+	public GameObject rhythmPrefab;
+	public GameObject sightPrefab;
 
 	private GameObject currentObj;
 	private PianoKeyboardScript pianoKeyboard;
@@ -62,8 +68,11 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 
 	public void OnDifficultySelect(Difficulty paramDiff)
 	{
-		difficulty = paramDiff;
-		ChangeState(nextState);
+		Destroy(currentObj);
+		currentObj = (GameObject)GameObject.Instantiate(playByEarPrefab);
+		GameModeScript gms = currentObj.GetComponent<GameModeScript>();
+		gms.SetDifficulty(paramDiff);
+		gms.SetManager(this);
 	}
 
 	public void ChangeState(GameManagerState paramState)
@@ -74,21 +83,11 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 		case GameManagerState.Menu:
 			currentObj = (GameObject)GameObject.Instantiate(menuPrefab);
 			break;
-		case GameManagerState.ChooseDifficulty:
-			currentObj = (GameObject)GameObject.Instantiate(difficultyPrefab);
-			break;
-		case GameManagerState.DifficultyDone:			
-			break;
+		case GameManagerState.SightReading:
+		case GameManagerState.RhythmTutor:
+		case GameManagerState.PlayByEar:
 		default:
-			if (state != GameManagerState.DifficultyDone)
-			{
-				nextState = paramState;
-				ChangeState(GameManagerState.ChooseDifficulty);
-				return;
-			}
-			else
-			{
-			}
+			currentObj = (GameObject)GameObject.Instantiate(difficultyPrefab);
 			break;
 		}
 		GameModeScript mode = currentObj.GetComponent<GameModeScript>();
