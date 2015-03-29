@@ -51,6 +51,7 @@
      <Compile Include="Assets\Script\Metronome.cs" />
      <Compile Include="Assets\Script\QSoundScript.cs" />
      <Compile Include="Assets\Script\RhythmTutor.cs" />
+     <Compile Include="Assets\Script\RhythmTutorGUIScript.cs" />
      <Compile Include="Assets\Script\SightReadingTutor.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
