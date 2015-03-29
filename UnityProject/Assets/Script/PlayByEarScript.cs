@@ -3,12 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public interface PianoKeyboardObserver
-{
-	void OnPianoKeyDown(PianoKey paramKey);
-}
-
-public class PlayByEarScript : MonoBehaviour, PianoKeyboardObserver {
+public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 
 	public enum State
 	{
@@ -18,17 +13,13 @@ public class PlayByEarScript : MonoBehaviour, PianoKeyboardObserver {
 		Input,
 		Results
 	}
+	
+	private const float NOTE_DURATION = 0.5f;
 
 	public int NUM_OF_NOTES = 3;
-	private const float NOTE_DURATION = 0.5f;
 	public AudioClip[] audioClips;
 	public AudioSource source;
 	public State state;
-	public PianoKeyboardScript piano;
-	public Text upperText;
-	public Text lowerText;
-	public GameObject menu_1; 
-	public GameObject menu_2; 
 	public float countdown;
 
 	public SheetMusicDisplayScript sheetMusic;
@@ -45,9 +36,18 @@ public class PlayByEarScript : MonoBehaviour, PianoKeyboardObserver {
 	// results 
 	public int resultsPoints;
 
+	// related scene objects
+	public Text upperText;
+	public Text lowerText;
+	public GameObject menu_1; 
+	public GameObject menu_2; 
+	private PianoKeyboardScript piano;
+
 	// Use this for initialization
 	void Start () 
-	{					
+	{			
+		piano = GameObject.FindGameObjectWithTag("PianoKeyBoard").GetComponent<PianoKeyboardScript>();
+		piano.observers.Add(this);
 		audioClips = new AudioClip[Constants.PIANO_NUM_KEYS];
 		for (int i = 0; i < Constants.PIANO_NUM_KEYS; i++)
 			audioClips[i] = Resources.Load<AudioClip>(Constants.PIANO_SOUND_FILES[i]);
@@ -97,7 +97,6 @@ public class PlayByEarScript : MonoBehaviour, PianoKeyboardObserver {
 			upperText.text = "Which notes did you hear?";
 			lowerText.enabled = false;
 			upperText.enabled = true;
-			piano.observers.Add(this);
 			menu_1.SetActive(true);
 			menu_2.SetActive(false);
 			inputKeys = new PianoKey[songKeys.Length];
@@ -156,6 +155,8 @@ public class PlayByEarScript : MonoBehaviour, PianoKeyboardObserver {
 
 	public void OnMenu()
 	{
+		piano.observers.Remove(this);
+		gameManager.ChangeState(GameManagerState.Menu);
 	}
 	
 	void Update () 
@@ -187,8 +188,6 @@ public class PlayByEarScript : MonoBehaviour, PianoKeyboardObserver {
 				ChangeState(State.Results);
 			break;
 		case State.Results:
-			if (piano.observers.Contains(this))
-				piano.observers.Remove(this);
 			break;
 		}
 	}

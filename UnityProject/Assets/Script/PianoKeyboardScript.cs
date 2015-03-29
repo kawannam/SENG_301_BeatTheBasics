@@ -1,6 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
+public interface IPianoKeyboardObserver
+{
+	void OnPianoKeyDown(PianoKey paramKey);
+}
 
 public class PianoKeyboardScript : MonoBehaviour  
 {
@@ -11,7 +16,7 @@ public class PianoKeyboardScript : MonoBehaviour
 	private KeyState[] prevKeyStates = new KeyState[(int)PianoKey.MAX];
 	private KeyCode[] binding = new KeyCode[(int)PianoKey.MAX];
 	public PianoKeyScript[] keyScripts;
-	public List<PianoKeyboardObserver> observers = new List<PianoKeyboardObserver>();
+	public List<IPianoKeyboardObserver> observers = new List<IPianoKeyboardObserver>();
 	// Use this for initialization
 	void Start () 
 	{
@@ -59,7 +64,7 @@ public class PianoKeyboardScript : MonoBehaviour
 			{
 				if (prevKeyStates[i] == KeyState.Released)
 				{
-					foreach(PianoKeyboardObserver observer in observers)
+					foreach(IPianoKeyboardObserver observer in observers)
 						observer.OnPianoKeyDown(currKey);
 				}
 				if (!sourceList[i].isPlaying)
