@@ -3,12 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public interface PianoKeyboardObserver
-{
-	void OnPianoKeyDown(PianoKey paramKey);
-}
-
-public class PlayByEarScript : GameModeScript, PianoKeyboardObserver {
+public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 
 	public enum State
 	{
