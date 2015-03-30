@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
-
-public class Metronome : MonoBehaviour {
+public class Metronome : GameModeScript {
 	const int MAX_BPM = 240;
 	const int MIN_BPM = 0;
 	const int BPM_INC = 10;
@@ -14,8 +12,7 @@ public class Metronome : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		bpm = 240;
-		isActive = true;
+		bpm = 120;
 	}
 	public void SetBPM(int paramBPM)
 	{
@@ -25,8 +22,9 @@ public class Metronome : MonoBehaviour {
 			bpm = 240;
 		else
 			bpm = paramBPM;
-		Next = bpm / 60f;
-		source.Play();   
+		Next = 60f / bpm;
+		if (isActive)
+			source.Play();   
 	}
 	public void IncreaseBPM()
 	{
@@ -43,9 +41,11 @@ public class Metronome : MonoBehaviour {
 		else
 			bpm = bpm - BPM_INC;
 	}
-	public Metronome()
+	public void ToggleActive()
 	{
+		isActive = !isActive;
 	}
+
 	// Update is called once per frame
 	void Update () {
 		if (!isActive)
@@ -53,7 +53,7 @@ public class Metronome : MonoBehaviour {
 		if (Next <= 0)
 		{
 			source.Play();
-			Next = 60f/bpm;
+			Next = 60f / bpm;
 		}
 		Next -= Time.deltaTime;
 	}
