@@ -83,9 +83,6 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 				int rand = (int)(Random.value * Constants.PIANO_NUM_KEYS); 
 				songKeys[i] = (PianoKey)rand;
 			}
-			/*songKeys[0] = PianoKey.H_A;
-			songKeys[1] = PianoKey.H_As;
-			songKeys[2] = PianoKey.H_B;*/
 			ChangeState(State.Countdown);
 			break;
 		case State.Countdown:
@@ -122,6 +119,7 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 
 			upperText.enabled = false;
 			lowerText.enabled = true;
+			RegisterScore(resultsPoints / NUM_OF_NOTES * Constants.MAX_STARS);
 			break;
 		}
 	}

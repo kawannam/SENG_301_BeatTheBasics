@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Resources\Textures\StickerBook\StickerBookStuff.cs" />
      <Compile Include="Assets\Script\Constants.cs" />
      <Compile Include="Assets\Script\DifficultyMenuScript.cs" />
      <Compile Include="Assets\Script\GameManagerScript.cs" />
@@ -58,11 +57,11 @@
      <Compile Include="Assets\Script\PianoKeyboardScript.cs" />
      <Compile Include="Assets\Script\PlayByEarScript.cs" />
      <Compile Include="Assets\Script\RhythmTutor.cs" />
-     <Compile Include="Assets\Script\RhythmTutorGUIScript.cs" />
-     <Compile Include="Assets\Script\RhythmTutoriDisplayScript.cs" />
      <Compile Include="Assets\Script\SheetMusicDisplayScript.cs" />
      <Compile Include="Assets\Script\SheetMusicModeScript.cs" />
      <Compile Include="Assets\Script\SightReadingTutorScript.cs" />
+     <Compile Include="Assets\Script\StarDisplayScript.cs" />
+     <Compile Include="Assets\Script\StickerBookScript.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
