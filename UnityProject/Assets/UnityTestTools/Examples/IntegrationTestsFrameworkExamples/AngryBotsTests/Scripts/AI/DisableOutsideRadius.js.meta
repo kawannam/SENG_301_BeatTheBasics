@@ -1,12 +1,19 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 8e2861bab226d5248b4b8a0f98968005
 timeCreated: 1427240117
 licenseType: Free
+=======
+guid: 7014b4a391f1ae6448a456f14e7899f5
+>>>>>>> origin/Brian
 MonoImporter:
   serializedVersion: 2
   defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
+<<<<<<< HEAD
   assetBundleName: 
   assetBundleVariant: 
+=======
+>>>>>>> origin/Brian

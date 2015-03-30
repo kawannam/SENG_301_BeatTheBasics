@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 64fcef489cbea4b46bcbc323ca30ecfb
 timeCreated: 1427240115
 licenseType: Free
@@ -18,3 +19,11 @@ PluginImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+=======
+guid: ed27b77fd040f6647b922ff9a2c2fd87
+MonoAssemblyImporter:
+  serializedVersion: 1
+  iconMap: {}
+  executionOrder: {}
+  userData: 
+>>>>>>> origin/Brian

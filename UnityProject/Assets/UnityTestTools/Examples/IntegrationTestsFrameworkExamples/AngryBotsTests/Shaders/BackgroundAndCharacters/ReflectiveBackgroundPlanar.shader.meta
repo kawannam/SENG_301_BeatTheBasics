@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 43d3a539e0f4c4a4aad24fcfaad95f3b
 timeCreated: 1427240567
 licenseType: Free
@@ -7,3 +8,9 @@ ShaderImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+=======
+guid: f851887908bf3504bab98682b18b3e54
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+>>>>>>> origin/Brian

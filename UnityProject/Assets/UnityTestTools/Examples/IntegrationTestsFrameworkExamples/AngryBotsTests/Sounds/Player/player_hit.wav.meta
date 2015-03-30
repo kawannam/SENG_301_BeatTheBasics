@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: d8dae94488be3f247b93bf29cd43e2af
 timeCreated: 1427240636
 licenseType: Free
@@ -19,3 +20,16 @@ AudioImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+=======
+guid: ae0870e16cc9d3448aac4933360f8e5a
+AudioImporter:
+  serializedVersion: 4
+  format: -1
+  quality: -1
+  stream: 1
+  3D: 1
+  forceToMono: 0
+  useHardware: 0
+  loopable: 0
+  userData: 
+>>>>>>> origin/Brian
