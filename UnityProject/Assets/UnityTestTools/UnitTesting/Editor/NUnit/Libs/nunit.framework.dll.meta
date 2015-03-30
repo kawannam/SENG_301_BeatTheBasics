@@ -1,7 +1,29 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: f5e82ea7652268143be44c26f98a4d4a
+timeCreated: 1427240120
+licenseType: Free
+PluginImporter:
+  serializedVersion: 1
+  iconMap: {}
+  executionOrder: {}
+  isPreloaded: 0
+  platformData:
+    Any:
+      enabled: 0
+      settings: {}
+    Editor:
+      enabled: 1
+      settings:
+        DefaultValueInitialized: true
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+=======
 guid: 0817653616f69e441b0953d6c63d1dce
 MonoAssemblyImporter:
   serializedVersion: 1
   iconMap: {}
   executionOrder: {}
   userData: 
+>>>>>>> origin/Brian

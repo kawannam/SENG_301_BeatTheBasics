@@ -20,7 +20,6 @@ public enum GameManagerState
 	StartUp,
 	Menu,
 	TableOfContents,
-	FreePlay,
 	PlayByEar,
 	RhythmTutor,
 	SightReading,
@@ -36,10 +35,13 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 	public GameObject pianoPrefab;
 	public GameObject menuPrefab;
 	public GameObject difficultyPrefab;
+	public GameObject metronomePrefab;
+
 	// game mode prefabs
 	public GameObject playByEarPrefab;
 	public GameObject rhythmPrefab;
 	public GameObject sightPrefab;
+	public GameObject stickerPrefab;
 
 	private GameObject currentObj;
 	private PianoKeyboardScript pianoKeyboard;
@@ -80,6 +82,12 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 		ExitState(state);
 		switch(paramState)
 		{
+		case GameManagerState.StickerBook:
+			currentObj = (GameObject)GameObject.Instantiate(stickerPrefab);
+			break;
+		case GameManagerState.Metronome:
+			currentObj = (GameObject)GameObject.Instantiate(metronomePrefab);
+			break;
 		case GameManagerState.Menu:
 			currentObj = (GameObject)GameObject.Instantiate(menuPrefab);
 			break;

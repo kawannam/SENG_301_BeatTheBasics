@@ -36,6 +36,7 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 	const float BAR_WIDTH = 300;
 	const float LINE_HEIGHT = 16;
 	public Transform noteGrp;
+	public Transform displayGroup;
 	public List<GameObject> noteObjects = new List<GameObject>();
 	public List<SheetMusicNote> notes = new List<SheetMusicNote>();
 	private string[] prefabs = new string[]{
@@ -82,6 +83,14 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 		x_offset = BAR_WIDTH / 8;
 		notes.Clear();
 	}
+
+	public void ShiftDisplay(float paramXOffs)
+	{
+		Vector3 pos = displayGroup.localPosition;
+		pos.x += paramXOffs;
+		displayGroup.localPosition = pos;
+	}
+
 
 	public void AddNote(SheetMusicNote paramNote, Color paramColor)
 	{
