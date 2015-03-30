@@ -1,4 +1,26 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: 7c3fa45082e65d046813bff380017abe
+timeCreated: 1427240634
+licenseType: Free
+AudioImporter:
+  serializedVersion: 6
+  defaultSettings:
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 0
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  preloadAudioData: 1
+  loadInBackground: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+=======
 guid: 432286ae6ca51104581d5e04a63f9b3c
 AudioImporter:
   serializedVersion: 4
@@ -10,3 +32,4 @@ AudioImporter:
   useHardware: 0
   loopable: 0
   userData: 
+>>>>>>> origin/Brian

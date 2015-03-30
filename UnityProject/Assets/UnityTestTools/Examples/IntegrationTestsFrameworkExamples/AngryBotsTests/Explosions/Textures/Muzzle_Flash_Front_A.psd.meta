@@ -1,5 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: c4361b9801aaa2c45a3ccd7a208d4404
+timeCreated: 1427240535
+licenseType: Free
+=======
 guid: a34c0e52d6de5034f9e6fdb82e7a1683
+>>>>>>> origin/Brian
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 2
@@ -20,6 +26,24 @@ TextureImporter:
   isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
+<<<<<<< HEAD
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: -1
+  nPOTScale: 1
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 0
+=======
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 1024
@@ -32,16 +56,27 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
+>>>>>>> origin/Brian
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+<<<<<<< HEAD
+  alphaIsTransparency: 0
+  textureType: -1
+=======
   alphaIsTransparency: 1
   textureType: 8
+>>>>>>> origin/Brian
   buildTargetSettings: []
   spriteSheet:
     sprites: []
   spritePackingTag: 
   userData: 
+<<<<<<< HEAD
+  assetBundleName: 
+  assetBundleVariant: 
+=======
+>>>>>>> origin/Brian

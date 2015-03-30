@@ -1,4 +1,14 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: 9ff6326163ae8724b804e988a28a3df1
+timeCreated: 1427240654
+licenseType: Free
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+=======
 guid: 9a14b94d1f0defe43b54d1e9d15ef4c7
 NativeFormatImporter:
   userData: 
+>>>>>>> origin/Brian

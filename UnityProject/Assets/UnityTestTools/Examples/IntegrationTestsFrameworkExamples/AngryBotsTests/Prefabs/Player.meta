@@ -1,5 +1,16 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: 3961fe87ff2ab0c4ca24785ae5a4308a
+folderAsset: yes
+timeCreated: 1427240110
+licenseType: Free
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+=======
 guid: f4fbc6e0f84d08b43a75ccc13ffe97ff
 folderAsset: yes
 DefaultImporter:
   userData: 
+>>>>>>> origin/Brian
