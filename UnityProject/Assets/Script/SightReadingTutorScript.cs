@@ -9,7 +9,7 @@ public class SightReadingTutorScript : GameModeScript, IPianoKeyboardObserver
 		Play,
 		Result
 	}
-	const int X_STEP = 20;
+	const int X_STEP = -75;
 
 	public PianoKeyboardScript piano;
 	public int[] musicScore;
@@ -17,6 +17,7 @@ public class SightReadingTutorScript : GameModeScript, IPianoKeyboardObserver
 	public int beatNumber;
 	public State state;
 	public SheetMusicDisplayScript musicDisplay;
+	public SheetMusicDisplayScript inputDisplay;
 	public int points;
 	public Text text;
 	
@@ -54,6 +55,16 @@ public class SightReadingTutorScript : GameModeScript, IPianoKeyboardObserver
 		}
 		state = paramState;
 	}
+	
+	public void OnNext()
+	{
+		ChangeState(State.Play);
+	}
+	
+	public void OnReplay()
+	{
+		ChangeState(State.Play);
+	}
 
 	public void OnQuit()
 	{
@@ -64,6 +75,7 @@ public class SightReadingTutorScript : GameModeScript, IPianoKeyboardObserver
 	{
 		if (state == State.Play)
 		{
+			Color noteClr = Color.black;
 			playerInput[beatNumber] = (int)paramKey;	
 			if (playerInput[beatNumber] == musicScore[beatNumber])
 			{
@@ -72,11 +84,18 @@ public class SightReadingTutorScript : GameModeScript, IPianoKeyboardObserver
 			}
 			else
 			{
+				noteClr = Color.red;
 				//print player input + wrong
 			}
+			inputDisplay.AddNote(new SheetMusicNote(NoteType.Quarter, paramKey), noteClr);
 			beatNumber++;		
 			if (beatNumber >= musicScore.Length)
 				ChangeState(State.Result);
+			else
+			{
+				inputDisplay.ShiftDisplay(X_STEP);
+				musicDisplay.ShiftDisplay(X_STEP);
+			}
 		}
 	}
 

@@ -26,6 +26,7 @@ public class Metronome : GameModeScript {
 		if (isActive)
 			source.Play();   
 	}
+
 	public void IncreaseBPM()
 	{
 		if ((bpm + BPM_INC) > MAX_BPM)
