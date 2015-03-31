@@ -103,6 +103,7 @@ public class RhythmTutor : GameModeScript {
 			scoreObject.SetActive (false);
 			Next = 0;
 			beatNumber = 0;
+			played = false;
 			break;
 		case State.Result:
 			listenObject.SetActive(false);
