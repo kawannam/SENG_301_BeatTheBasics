@@ -42,4 +42,8 @@ public class GameModeScript : MonoBehaviour {
 		if (starObj != null)
 			Destroy(starObj);
 	}
+
+	public void OnMenu(){
+		gameManager.ChangeState (GameManagerState.Menu);
+	}
 }
