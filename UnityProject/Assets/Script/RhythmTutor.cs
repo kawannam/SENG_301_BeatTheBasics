@@ -2,12 +2,15 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class RhythmTutor : MonoBehaviour {
+public class RhythmTutor : GameModeScript {
 	const float MARGIN_OF_ERROR = 0.10f;
 
 	public float changeBeat;
 	public int beatNumber;
 	public float[] beats;
+	public float[] rhythmMapHard;
+	public float[] rhythmMapEasy;
+	public float[] rhythmMapMed;
 	public int[] mapScore;
 
 //	public bool activeBeat;
@@ -30,6 +33,8 @@ public class RhythmTutor : MonoBehaviour {
 	public GameObject scoreObject;
 	public GameObject buttons1;
 	public Text countdownText;
+	public GameObject quarterNotePrefab;
+	public Transform noteGroup1;
 
 	//READY BUTTON
 	public void onReady (){
@@ -67,6 +72,13 @@ public class RhythmTutor : MonoBehaviour {
 			scoreObject.SetActive (false);
 			buttons1.SetActive(false);
 			beatNumber = 0;
+			isActive = false;
+			while(beatNumber < beats.Length)
+			{
+				mapScore[beatNumber] = 0;
+				beatNumber++;
+			}
+			beatNumber = 0;
 			Next = -3;
 			countdownText.text = "3";
 			break;
@@ -81,19 +93,54 @@ public class RhythmTutor : MonoBehaviour {
 			listenObject.SetActive(false);
 			playObject.SetActive (false);
 			scoreObject.SetActive (true);
+			int y = 65;
+			beatNumber = 0;
+			for(int i = 0; i < 2; i++)
+			{
+				int count = 1;
+				while(count < 9)
+				{
+					GameObject note = (GameObject)GameObject.Instantiate(quarterNotePrefab);
+					note.transform.SetParent(noteGroup1);
+					Vector3 pos = note.transform.localPosition;
+					pos.x += (100 * count);
+					pos.y = y;
+					note.transform.localPosition = pos;
+					Image noteImg = note.GetComponent<Image>();
+					if(mapScore[beatNumber] == 0)
+						noteImg.color = Color.red;
+					else
+						noteImg.color = Color.green;
+					count++;
+					beatNumber++;
+					if(beatNumber >= mapScore.Length)
+						count = 9;
+				}
+				y -= 100;
+			}
 			break;
 		}
 		state = paramState;
 	}
 	// Use this for initialization
 	void Start () {
-		isActive = false;
 		played = false;
-		beats = new float[]{
-			0f, 0.25f, 0.5f, 1f, 1.5f, 1.75f, 2f, 2.25f, 2.5f, 3.5f, 4f, 4.5f};
+		rhythmMapHard = new float[]{
+			0f, 0.25f, 0.5f, 1f, 1.5f, 1.75f, 2f, 2.25f, 2.5f, 3.5f, 4f, 4.5f};//12 notes
 		//Eighth eighth quarter quarter eighth eight eighth eighth half quarter quarter whatever
-		mapScore = new int[]{
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		rhythmMapEasy = new float[]{
+		0f, 0.5f, 1f, 1.5f, 1.75f, 2f};//6 notes
+		//Quarter quarter half quarter quarter half
+		rhythmMapMed = new float[]{
+		0f, 0.25f, 0.5f, 1f, 1.25f, 2.75f, 3f};//7 notes
+		//Eighth eighth quarter eighth 3/4 note eighth whatever
+		if (difficulty == Difficulty.Easy)
+			beats = rhythmMapEasy;
+		else if (difficulty == Difficulty.Medium)
+			beats = rhythmMapMed;
+		else if (difficulty == Difficulty.Hard)
+			beats = rhythmMapHard;
+		mapScore = new int[beats.Length];
 		ChangeState (State.Listen);
 	}
 
@@ -125,7 +172,7 @@ public class RhythmTutor : MonoBehaviour {
 				countdownText.text = "1";
 			else if(Next >= 0)
 				countdownText.text = "Listen to the Beat!";
-			if(beatNumber >= 12)
+			if(beatNumber >= beats.Length)
 			{
 				buttons1.SetActive(true);
 				break;
@@ -168,7 +215,7 @@ public class RhythmTutor : MonoBehaviour {
 				}
 			}
 			//CHECK TO CHANGE THE BEAT NUMBER
-			if(beatNumber == 11)
+			if(beatNumber == (beats.Length - 1))
 			{
 				if(Next >= 6)
 				{
