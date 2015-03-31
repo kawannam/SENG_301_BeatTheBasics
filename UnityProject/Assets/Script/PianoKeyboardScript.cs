@@ -15,6 +15,7 @@ public class PianoKeyboardScript : MonoBehaviour
 	private KeyState[] currKeyStates = new KeyState[(int)PianoKey.MAX];
 	private KeyState[] prevKeyStates = new KeyState[(int)PianoKey.MAX];
 	private KeyCode[] binding = new KeyCode[(int)PianoKey.MAX];
+	public SpriteRenderer spriteRenderer;
 	public PianoKeyScript[] keyScripts;
 	public List<IPianoKeyboardObserver> observers = new List<IPianoKeyboardObserver>();
 	// Use this for initialization
