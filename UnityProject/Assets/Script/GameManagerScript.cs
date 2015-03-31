@@ -21,7 +21,7 @@ public enum GameManagerState
 	Menu,
 	TableOfContents,
 	PlayByEar,
-	RhythmTutor,
+	ClapBack,
 	SightReading,
 	Metronome,
 	StickerBook
@@ -42,8 +42,10 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 	public GameObject rhythmPrefab;
 	public GameObject sightPrefab;
 	public GameObject stickerPrefab;
-
+	
 	private GameObject currentObj;
+	private GameObject postDifficultyPrefab;
+	private GameModeType postDifficultyMode;
 	private PianoKeyboardScript pianoKeyboard;
 
 	public PianoKeyboardScript GetKeyboard()
@@ -71,8 +73,9 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 	public void OnDifficultySelect(Difficulty paramDiff)
 	{
 		Destroy(currentObj);
-		currentObj = (GameObject)GameObject.Instantiate(playByEarPrefab);
+		currentObj = (GameObject)GameObject.Instantiate(postDifficultyPrefab);
 		GameModeScript gms = currentObj.GetComponent<GameModeScript>();
+		gms.SetModeType(postDifficultyMode);
 		gms.SetDifficulty(paramDiff);
 		gms.SetManager(this);
 	}
@@ -92,8 +95,17 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 			currentObj = (GameObject)GameObject.Instantiate(menuPrefab);
 			break;
 		case GameManagerState.SightReading:
-		case GameManagerState.RhythmTutor:
+			postDifficultyPrefab = sightPrefab;
+			postDifficultyMode = GameModeType.SightReading;
+			goto default;
+		case GameManagerState.ClapBack:
+			postDifficultyPrefab = rhythmPrefab;
+			postDifficultyMode = GameModeType.ClapBack;
+			goto default;
 		case GameManagerState.PlayByEar:
+			postDifficultyPrefab = playByEarPrefab;
+			postDifficultyMode = GameModeType.PlayByEar;
+			goto default;
 		default:
 			currentObj = (GameObject)GameObject.Instantiate(difficultyPrefab);
 			break;
