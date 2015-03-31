@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -52,10 +52,10 @@ public class MenuScript : GameModeScript {
 			gameManager.ChangeState(GameManagerState.PlayByEar);
 			break;
 		case 2:
-			gameManager.ChangeState(GameManagerState.RhythmTutor);
+			gameManager.ChangeState(GameManagerState.SightReading);
 			break;
 		case 3:
-			gameManager.ChangeState(GameManagerState.SightReading);
+			gameManager.ChangeState(GameManagerState.ClapBack);
 			break;
 		case 4:
 			gameManager.ChangeState(GameManagerState.Metronome);

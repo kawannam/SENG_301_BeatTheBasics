@@ -38,6 +38,7 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 	public Transform noteGrp;
 	public List<GameObject> noteObjects = new List<GameObject>();
 	public List<SheetMusicNote> notes = new List<SheetMusicNote>();
+	private Vector3 startPosition;
 	private string[] prefabs = new string[]{
 		"Prefabs/SheetMusic/wholeNote",
 		"Prefabs/SheetMusic/halfNote",
@@ -72,15 +73,28 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 		198		// bb
 	};
 	
-	private float x_offset = BAR_WIDTH / 8;
+	public float x_offset = BAR_WIDTH / 8;
+
+	void Start()
+	{
+		startPosition = transform.localPosition;
+	}
 
 	public void Reset()
 	{
 		foreach(GameObject go in noteObjects)
 			GameObject.Destroy(go);
 
+		transform.localPosition = startPosition;
 		x_offset = BAR_WIDTH / 8;
 		notes.Clear();
+	}
+
+	public void ShiftDisplay(float paramXOffs)
+	{
+		Vector3 pos = transform.localPosition;
+		pos.x += paramXOffs;
+		transform.localPosition = pos;
 	}
 
 	public void AddNote(SheetMusicNote paramNote, Color paramColor)

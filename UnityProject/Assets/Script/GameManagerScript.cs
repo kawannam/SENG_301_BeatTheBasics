@@ -20,9 +20,8 @@ public enum GameManagerState
 	StartUp,
 	Menu,
 	TableOfContents,
-	FreePlay,
 	PlayByEar,
-	RhythmTutor,
+	ClapBack,
 	SightReading,
 	Metronome,
 	StickerBook
@@ -36,12 +35,17 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 	public GameObject pianoPrefab;
 	public GameObject menuPrefab;
 	public GameObject difficultyPrefab;
+	public GameObject metronomePrefab;
+
 	// game mode prefabs
 	public GameObject playByEarPrefab;
 	public GameObject rhythmPrefab;
 	public GameObject sightPrefab;
-
+	public GameObject stickerPrefab;
+	
 	private GameObject currentObj;
+	private GameObject postDifficultyPrefab;
+	private GameModeType postDifficultyMode;
 	private PianoKeyboardScript pianoKeyboard;
 
 	public PianoKeyboardScript GetKeyboard()
@@ -69,8 +73,9 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 	public void OnDifficultySelect(Difficulty paramDiff)
 	{
 		Destroy(currentObj);
-		currentObj = (GameObject)GameObject.Instantiate(playByEarPrefab);
+		currentObj = (GameObject)GameObject.Instantiate(postDifficultyPrefab);
 		GameModeScript gms = currentObj.GetComponent<GameModeScript>();
+		gms.SetModeType(postDifficultyMode);
 		gms.SetDifficulty(paramDiff);
 		gms.SetManager(this);
 	}
@@ -80,12 +85,27 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 		ExitState(state);
 		switch(paramState)
 		{
+		case GameManagerState.StickerBook:
+			currentObj = (GameObject)GameObject.Instantiate(stickerPrefab);
+			break;
+		case GameManagerState.Metronome:
+			currentObj = (GameObject)GameObject.Instantiate(metronomePrefab);
+			break;
 		case GameManagerState.Menu:
 			currentObj = (GameObject)GameObject.Instantiate(menuPrefab);
 			break;
 		case GameManagerState.SightReading:
-		case GameManagerState.RhythmTutor:
+			postDifficultyPrefab = sightPrefab;
+			postDifficultyMode = GameModeType.SightReading;
+			goto default;
+		case GameManagerState.ClapBack:
+			postDifficultyPrefab = rhythmPrefab;
+			postDifficultyMode = GameModeType.ClapBack;
+			goto default;
 		case GameManagerState.PlayByEar:
+			postDifficultyPrefab = playByEarPrefab;
+			postDifficultyMode = GameModeType.PlayByEar;
+			goto default;
 		default:
 			currentObj = (GameObject)GameObject.Instantiate(difficultyPrefab);
 			break;

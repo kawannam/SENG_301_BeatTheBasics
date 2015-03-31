@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: 822e714b8b51e4b458317e274a232cba
+guid: a0601354278465b40b53d6050a460285
 TextureImporter:
   fileIDToRecycleName:
-    21300000: sheet
-    21300002: sheet_0
+    21300000: starSheet_0
+    21300002: starSheet_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -39,29 +39,29 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 1
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: sheet
+    - name: starSheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 694
-        height: 281
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: sheet_0
+    - name: starSheet_1
       rect:
         serializedVersion: 2
-        x: 393
+        x: 128
         y: 0
-        width: 301
-        height: 281
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

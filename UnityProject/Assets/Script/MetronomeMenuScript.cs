@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class MetronomeMenuScript : MonoBehaviour {
+public class MetronomeMenuScript : GameModeScript {
 	
 	public Image toggleImg;
 	public Sprite playSpr;
@@ -13,7 +13,7 @@ public class MetronomeMenuScript : MonoBehaviour {
 	public Text bpmText;
 	public InputField inputField;
 	public int bpm;
-
+	public Metronome metronome;
 	public bool isPlaying;
 
 	public void OnToggle()
@@ -21,6 +21,7 @@ public class MetronomeMenuScript : MonoBehaviour {
 		isPlaying = !isPlaying;
 		toggleImg.color = !isPlaying ? playColor : stopColor;
 		toggleImg.sprite = !isPlaying ? playSpr : stopSpr;
+		metronome.ToggleActive();
 	}
 
 	void RestrictBPM()
@@ -35,19 +36,20 @@ public class MetronomeMenuScript : MonoBehaviour {
 	{
 		int.TryParse(paramValue, out bpm);		
 		RestrictBPM();
-		Debug.Log("OnInputEnd");
 		inputField.text = "";
+		metronome.SetBPM(bpm);
 	}
 	
 	public void OnChangeBPM(int paramAdd)
 	{
 		bpm += paramAdd;
 		RestrictBPM();
+		metronome.SetBPM(bpm);
 	}
 
-	public void OnClose()
+	public void OnQuit()
 	{
-		gameObject.SetActive(false);
+		gameManager.ChangeState(GameManagerState.Menu);
 	}
 
 	void Update()
