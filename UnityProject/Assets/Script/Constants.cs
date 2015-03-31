@@ -43,7 +43,6 @@ public static class Constants
 	public static int MIN_BPM = 1;
 	public const int NUM_OF_DIFFICULTY = 3;
 	public const int MAX_STARS = 3;
-
 	public static string[] PIANO_SOUND_FILES = new string[]{
 			"Sounds/piano2/piano.mf.C3",
 			"Sounds/piano2/piano.mf.Db3",

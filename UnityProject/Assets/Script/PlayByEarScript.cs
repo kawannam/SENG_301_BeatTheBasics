@@ -86,6 +86,7 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 			ChangeState(State.Countdown);
 			break;
 		case State.Countdown:
+			RemoveStarDisplay();
 			sheetMusic.Reset();
 			lowerText.enabled = true;
 			upperText.enabled = true;

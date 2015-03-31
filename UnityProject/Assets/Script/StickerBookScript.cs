@@ -26,12 +26,6 @@ public class StickerBookScript : GameModeScript {
 		}
 	}
 
-	public void OnCompletion(GameModeType paramMode, Difficulty paramDiff)
-	{
-		int index = (int)paramMode * 3 + (int)paramDiff; 
-		GameProgress[index] = 1;
-	}
-
 	public void quit(){
 		gameManager.ChangeState (GameManagerState.Menu);
 	}

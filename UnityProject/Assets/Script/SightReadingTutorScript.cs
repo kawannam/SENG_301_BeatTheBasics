@@ -57,6 +57,7 @@ public class SightReadingTutorScript : GameModeScript, IPianoKeyboardObserver
 		switch(paramState)
 		{
 		case State.Play:
+			RemoveStarDisplay();
 			menuObj.SetActive(false);
 			text.enabled = false;
 			playerInput = new int[musicScore.Length];
@@ -73,9 +74,10 @@ public class SightReadingTutorScript : GameModeScript, IPianoKeyboardObserver
 			break;
 		case State.Result:
 			menuObj.SetActive(true);
-			int numStars = (int)(((float)points / musicScore.Length) * 3);
+			int numStars = (int)(((float)points / musicScore.Length) * Constants.MAX_STARS);
 			text.enabled = true;
-			text.text = string.Format("{0} Stars!", numStars);;
+			text.text = string.Format("{0} Stars!", numStars);
+			RegisterScore(numStars);
 			break;
 		}
 		state = paramState;
@@ -101,16 +103,19 @@ public class SightReadingTutorScript : GameModeScript, IPianoKeyboardObserver
 		if (state == State.Play)
 		{
 			Color noteClr = Color.green;
-			playerInput[beatNumber] = (int)paramKey;	
-			if (playerInput[beatNumber] == musicScore[beatNumber])
+			if (beatNumber < playerInput.Length)
 			{
-				//print correct to screen
-				points++;
-			}
-			else
-			{
-				noteClr = Color.red;
-				//print player input + wrong
+				playerInput[beatNumber] = (int)paramKey;	
+				if (playerInput[beatNumber] == musicScore[beatNumber])
+				{
+					//print correct to screen
+					points++;
+				}
+				else
+				{
+					noteClr = Color.red;
+					//print player input + wrong
+				}
 			}
 			inputDisplay.AddNote(new SheetMusicNote(NoteType.Quarter, paramKey), noteClr);
 			beatNumber++;		

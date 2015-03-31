@@ -58,10 +58,10 @@
      <Compile Include="Assets\Script\PlayByEarScript.cs" />
      <Compile Include="Assets\Script\RhythmTutor.cs" />
      <Compile Include="Assets\Script\SheetMusicDisplayScript.cs" />
-     <Compile Include="Assets\Script\SheetMusicModeScript.cs" />
      <Compile Include="Assets\Script\SightReadingTutorScript.cs" />
      <Compile Include="Assets\Script\StarDisplayScript.cs" />
      <Compile Include="Assets\Script\StickerBookScript.cs" />
+     <Compile Include="Assets\Script\deleteme.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
