@@ -12,6 +12,11 @@ public class TableOfContentsScript : GameModeScript {
 	void Update () {
 	
 	}
+
+/* This function connects all game play options
+ * It shows uses all options at once
+ * all options are represented as buttons
+ */
 	public void OnSelect(int paramNum)
 	{
 		int selection = paramNum;

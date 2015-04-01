@@ -10,44 +10,50 @@ public class Metronome : GameModeScript {
 	public float Next;
 	public AudioSource source;
 
-	// Use this for initialization
+//Sets the initial bpm to 120 (Standard speed)
 	void Start () {
-		bpm = 120;
+		bpm = 120;										
 	}
+
+/* Compares user's bpm input with the min and max values
+ * If the input is out of bounds, set at closest possible value
+ * Starts the 
+ */
 	public void SetBPM(int paramBPM)
 	{
-		if (paramBPM < MIN_BPM)
-			bpm = 0;
-		else if (paramBPM > MAX_BPM)
-			bpm = 240;
+		if (paramBPM < MIN_BPM)							
+			bpm = 0;									
+		else if (paramBPM > MAX_BPM)					
+			bpm = 240;									
 		else
 			bpm = paramBPM;
 		Next = 60f / bpm;
 		if (isActive)
 			source.Play();   
 	}
-
+// Increases the BPM and resets it
 	public void IncreaseBPM()
 	{
-		if ((bpm + BPM_INC) > MAX_BPM)
-			bpm = MAX_BPM;
-		else
-			bpm = bpm + BPM_INC;
+		SetBPM (bpm + BPM_INC);
 	}
-	
+
+// Decrease the BPM and resets it
 	public void DecreaseBPM()
 	{
-		if ((bpm - BPM_INC) < MIN_BPM)
-			bpm = MIN_BPM;
-		else
-			bpm = bpm - BPM_INC;
+		SetBPM (bpm - BPM_INC);
 	}
+
+//Stops the metronome from playing noises 
 	public void ToggleActive()
 	{
 		isActive = !isActive;
 	}
 
-	// Update is called once per frame
+/* Checks if Metronome is on
+ * If it is off, do nothing
+ * If the speed is greater than 0 play metronome
+ * Keeps track of when a noise should be made
+ */
 	void Update () {
 		if (!isActive)
 			return;
