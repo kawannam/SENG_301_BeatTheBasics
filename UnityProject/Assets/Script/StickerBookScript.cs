@@ -15,7 +15,7 @@ public class StickerBookScript : GameModeScript {
 
 	public static int[] GameProgress = new int[9];		//Checks if game has been completed 
 	
-	void Start () 
+	public void Update() 
 	{
 		for (int i = 0; i < StickerList.Length; i++) {
 			if (GameProgress [i] == 0) {
