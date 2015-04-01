@@ -1,0 +1,13 @@
+How To Build:
+
+Requirements:
+=============
+
+Unity 4.6.3:	http://unity3d.com/get-unity/download/archive			(note: only tested with version 4.6.3)
+GitHub repo:	https://github.com/kawannam/SENG_301_BeatTheBasics
+
+
+To Build/Run:
+=============
+
+Load the Game scene located in Scenes folder, and press play/Run Scene
