@@ -44,6 +44,7 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 	public GameObject rhythmPrefab;
 	public GameObject sightPrefab;
 	public GameObject stickerPrefab;
+	public GameObject tableOfContentsPrefab;
 	
 	private GameObject currentObj;
 	private GameObject postDifficultyPrefab;
@@ -104,6 +105,9 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 		{
 		case GameManagerState.StickerBook:
 			currentObj = (GameObject)GameObject.Instantiate(stickerPrefab);
+			break;
+		case GameManagerState.TableOfContents:
+			currentObj = (GameObject)GameObject.Instantiate(tableOfContentsPrefab);
 			break;
 		case GameManagerState.Metronome:
 			currentObj = (GameObject)GameObject.Instantiate(metronomePrefab);

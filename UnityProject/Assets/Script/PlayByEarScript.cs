@@ -44,7 +44,7 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 	private PianoKeyboardScript piano;
 
 	// Use this for initialization
-	void Start () 
+	public void Start () 
 	{		
 		switch (difficulty)
 		{

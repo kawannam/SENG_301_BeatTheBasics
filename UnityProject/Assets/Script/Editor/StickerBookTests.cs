@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using NUnit.Framework;
@@ -7,34 +7,14 @@ using UnityTest;
 
 [TestFixture]
 [Category("My Tests")]
-internal class GameTests
+internal class StickerBookTest
 {
-	[Test]
-	[Category("Expected Outcome Test")]
-	public void Test_PBE_Difficulty()
-	{
-		GameObject t = Resources.Load<GameObject> ("Prefabs/PlayByEarObject");
-
-		PlayByEarScript earObj = t.GetComponent<PlayByEarScript> ();
-
-
-		GameModeScript gms = t.GetComponent<GameModeScript> ();
-
-		gms.SetDifficulty (Difficulty.Hard);
-		earObj.Start ();
-		int expected = 3;
-		int actual = earObj.NUM_OF_NOTES;
-		Assert.AreEqual (expected, actual);
-
-	
-	}
-
 	[Test]
 	[Category("Expected Outcome Test")]
 	public void TestSBBlank()
 	{
 		for (int i =0; i < 9; i++) {
-			
+
 			StickerBookScript.GameProgress [i] = 0;
 			GameObject t = Resources.Load<GameObject> ("Prefabs/StickerBookObject");
 			StickerBookScript stickerObj = t.GetComponent<StickerBookScript> ();
@@ -55,13 +35,11 @@ internal class GameTests
 			GameObject t = Resources.Load<GameObject> ("Prefabs/StickerBookObject");
 			StickerBookScript stickerObj = t.GetComponent<StickerBookScript> ();
 			stickerObj.Update ();
-			Color checkFull = new Color (1, 1, 1, 1);
-			Color expected = checkFull;
+			Color checkClr = new Color (1, 1, 1, 1);
+			Color expected = checkClr;
 			Color actual = stickerObj.StickerList [i].color;
 			Assert.AreEqual (expected, actual);
 		}
 	}
-	//throw new Exception("");
-
 
 }

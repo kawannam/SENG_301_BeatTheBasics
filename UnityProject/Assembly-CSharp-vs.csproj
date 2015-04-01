@@ -61,6 +61,7 @@
      <Compile Include="Assets\Script\SightReadingTutorScript.cs" />
      <Compile Include="Assets\Script\StarDisplayScript.cs" />
      <Compile Include="Assets\Script\StickerBookScript.cs" />
+     <Compile Include="Assets\Script\TableOfContentsScript.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
