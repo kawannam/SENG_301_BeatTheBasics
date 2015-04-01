@@ -7,7 +7,8 @@ public enum NoteType
 {
 	Whole,
 	Half,
-	Quarter
+	Quarter,
+	Eighth
 }
 
 [System.Serializable]
@@ -39,11 +40,14 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 	public List<GameObject> noteObjects = new List<GameObject>();
 	public List<SheetMusicNote> notes = new List<SheetMusicNote>();
 	private Vector3 startPosition;
+
 	private string[] prefabs = new string[]{
 		"Prefabs/SheetMusic/wholeNote",
 		"Prefabs/SheetMusic/halfNote",
 		"Prefabs/SheetMusic/quarterNote",
-		"Prefabs/SheetMusic/flatNote"
+		"Prefabs/SheetMusic/eighthNote",
+		"Prefabs/SheetMusic/flatNote",
+		"Prefabs/SheetMusic/lineNote"
 		};
 
 	public float[] y_offs = new float[]{
@@ -116,7 +120,7 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 		renderer.color = paramColor;
 		noteObjects.Add(g);
 		
-		switch(paramNote.key)
+		switch(paramNote.key)	// check for sharps
 		{	
 		case PianoKey.L_Cs:
 		case PianoKey.L_Ds:
@@ -128,7 +132,7 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 		case PianoKey.H_Ds:
 		case PianoKey.H_Fs:
 		case PianoKey.H_Gs:
-			g = Resources.Load<GameObject>(prefabs[3]);
+			g = Resources.Load<GameObject>(prefabs[4]);
 			g = (GameObject)GameObject.Instantiate(g);
 			g.transform.parent = noteGrp;
 			pos = Vector3.zero;
@@ -140,10 +144,26 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 			renderer = g.GetComponent<SpriteRenderer>();
 			renderer.color = paramColor;
 			break;
-		default:
-			break;
 		}
 		
+		switch(paramNote.key)	// check for middle C, draw a line thru it
+		{	
+		case PianoKey.H_C:
+		case PianoKey.H_Cs:
+			g = Resources.Load<GameObject>(prefabs[5]);
+			g = (GameObject)GameObject.Instantiate(g);
+			g.transform.parent = noteGrp;
+			pos = Vector3.zero;
+			pos.x = x_offset;
+			pos.y = y_offs[(int)paramNote.key];
+			g.transform.localPosition = pos;
+			g.transform.localScale = Vector3.one;
+			noteObjects.Add(g);
+			renderer = g.GetComponent<SpriteRenderer>();
+			renderer.color = paramColor;
+			break;
+		}
+
 		x_offset += BAR_WIDTH * paramNote.Duration;
 	}
 }
