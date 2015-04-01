@@ -29,7 +29,7 @@ public class GameModeScript : MonoBehaviour {
 		if (starPrefab == null)
 			starPrefab = Resources.Load<GameObject>("Prefabs/StarDisplayPrefab");
 
-		int stickerIndex = (int)modeType * Constants.NUM_OF_DIFFICULTY + (int)difficulty;
+		int stickerIndex = (int)modeType + (int)difficulty * Constants.NUM_OF_DIFFICULTY;
 		StickerBookScript.GameProgress[stickerIndex] = stars;
 	 	starObj = (GameObject)GameObject.Instantiate(starPrefab);
 		StarDisplayScript starDisp = starObj.GetComponent<StarDisplayScript>();
