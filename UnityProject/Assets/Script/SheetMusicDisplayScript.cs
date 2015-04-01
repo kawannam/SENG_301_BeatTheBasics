@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public enum NoteType
+public enum NoteType	// Note Lengths
 {
 	Whole,
 	Half,
-	Quarter
+	Quarter,
+	Eighth
 }
 
 [System.Serializable]
@@ -20,7 +21,7 @@ public class SheetMusicNote
 	{
 		get 
 		{ 
-			return (float)(Math.Pow(2, -((int)type))); 
+			return (float)(Math.Pow(2, -((int)type))); 	// return the duration of note in seconds
 		}
 	}
 
@@ -34,19 +35,18 @@ public class SheetMusicNote
 public class SheetMusicDisplayScript : MonoBehaviour {
 	
 	const float BAR_WIDTH = 300;
-	const float LINE_HEIGHT = 16;
-	public Transform noteGrp;
-	public List<GameObject> noteObjects = new List<GameObject>();
-	public List<SheetMusicNote> notes = new List<SheetMusicNote>();
-	private Vector3 startPosition;
-	private string[] prefabs = new string[]{
+	const float LINE_HEIGHT = 16;	// ex- a D note is 16 y-offset from C
+
+	private string[] prefabs = new string[]{	// prefabs for each note type
 		"Prefabs/SheetMusic/wholeNote",
 		"Prefabs/SheetMusic/halfNote",
 		"Prefabs/SheetMusic/quarterNote",
-		"Prefabs/SheetMusic/flatNote"
-		};
-
-	public float[] y_offs = new float[]{
+		"Prefabs/SheetMusic/eighthNote",
+		"Prefabs/SheetMusic/flatNote",
+		"Prefabs/SheetMusic/lineNote"
+	};
+	
+	public float[] y_offs = new float[]{	// the y offsets for each piano key note
 		0,		// c
 		8,		// db
 		8,		// d
@@ -72,21 +72,26 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 		198,	// bb
 		198		// bb
 	};
-	
-	public float x_offset = BAR_WIDTH / 8;
+
+	const float INITIAL_XOFFS = BAR_WIDTH / 8;	// the position 
+	public List<GameObject> noteObjects = new List<GameObject>();
+	public List<SheetMusicNote> notes = new List<SheetMusicNote>();
+	public float x_offset = INITIAL_XOFFS;
+	public Transform noteGrp;	// the parent of all the note sprites that will be added
+	private Vector3 startPosition;
 
 	void Start()
 	{
-		startPosition = transform.localPosition;
+		startPosition = transform.localPosition;	// reset the offset
 	}
 
 	public void Reset()
 	{
-		foreach(GameObject go in noteObjects)
+		foreach(GameObject go in noteObjects)	// clear all the notes we may have on screen  
 			GameObject.Destroy(go);
 
 		transform.localPosition = startPosition;
-		x_offset = BAR_WIDTH / 8;
+		x_offset = INITIAL_XOFFS;
 		notes.Clear();
 	}
 
@@ -99,7 +104,7 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 
 	public void AddNote(SheetMusicNote paramNote, Color paramColor)
 	{
-		notes.Add(paramNote);
+		notes.Add(paramNote);	// keep track of the notes we're adding
 
 		GameObject g = null;
 		Vector3 pos;
@@ -116,7 +121,7 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 		renderer.color = paramColor;
 		noteObjects.Add(g);
 		
-		switch(paramNote.key)
+		switch(paramNote.key)	// check for sharps
 		{	
 		case PianoKey.L_Cs:
 		case PianoKey.L_Ds:
@@ -128,7 +133,7 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 		case PianoKey.H_Ds:
 		case PianoKey.H_Fs:
 		case PianoKey.H_Gs:
-			g = Resources.Load<GameObject>(prefabs[3]);
+			g = Resources.Load<GameObject>(prefabs[4]);
 			g = (GameObject)GameObject.Instantiate(g);
 			g.transform.parent = noteGrp;
 			pos = Vector3.zero;
@@ -140,10 +145,26 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 			renderer = g.GetComponent<SpriteRenderer>();
 			renderer.color = paramColor;
 			break;
-		default:
-			break;
 		}
 		
+		switch(paramNote.key)	// check for middle C, draw a line thru it
+		{	
+		case PianoKey.H_C:
+		case PianoKey.H_Cs:
+			g = Resources.Load<GameObject>(prefabs[5]);
+			g = (GameObject)GameObject.Instantiate(g);
+			g.transform.parent = noteGrp;
+			pos = Vector3.zero;
+			pos.x = x_offset;
+			pos.y = y_offs[(int)paramNote.key];
+			g.transform.localPosition = pos;
+			g.transform.localScale = Vector3.one;
+			noteObjects.Add(g);
+			renderer = g.GetComponent<SpriteRenderer>();
+			renderer.color = paramColor;
+			break;
+		}
+
 		x_offset += BAR_WIDTH * paramNote.Duration;
 	}
 }

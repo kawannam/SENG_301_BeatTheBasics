@@ -6,6 +6,8 @@ public interface IGameManagerScript
 	PianoKeyboardScript GetKeyboard();
 	void ChangeState(GameManagerState paramState);
 	void OnDifficultySelect(Difficulty paramDiff);
+	void EnableKeyboard();
+	void DisableKeyboard();
 }
 
 public enum Difficulty
@@ -68,6 +70,9 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 			GameObject gameObj = (GameObject)GameObject.Instantiate(pianoPrefab);
 			pianoKeyboard = gameObj.GetComponent<PianoKeyboardScript>();
 			break;
+		case GameManagerState.ClapBack:
+			EnableKeyboard();
+			break;
 		}
 	}
 
@@ -79,6 +84,18 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 		gms.SetModeType(postDifficultyMode);
 		gms.SetDifficulty(paramDiff);
 		gms.SetManager(this);
+	}
+	
+	public void DisableKeyboard()
+	{
+		pianoKeyboard.spriteRenderer.color = Color.grey;
+		pianoKeyboard.enabled = false;
+	}
+	
+	public void EnableKeyboard()
+	{
+		pianoKeyboard.spriteRenderer.color = Color.white;
+		pianoKeyboard.enabled = true;
 	}
 
 	public void ChangeState(GameManagerState paramState)

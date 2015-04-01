@@ -9,14 +9,16 @@ public interface IPianoKeyboardObserver
 
 public class PianoKeyboardScript : MonoBehaviour  
 {
-	const int NUM_KEYS = 24;
+	const int NUM_KEYS = 24;	// keys for 2 full octaves
 	private AudioClip[] clipList;
 	private List<AudioSource> sourceList = new List<AudioSource>();
 	private KeyState[] currKeyStates = new KeyState[(int)PianoKey.MAX];
 	private KeyState[] prevKeyStates = new KeyState[(int)PianoKey.MAX];
 	private KeyCode[] binding = new KeyCode[(int)PianoKey.MAX];
+	public SpriteRenderer spriteRenderer;
 	public PianoKeyScript[] keyScripts;
 	public List<IPianoKeyboardObserver> observers = new List<IPianoKeyboardObserver>();
+
 	// Use this for initialization
 	void Start () 
 	{

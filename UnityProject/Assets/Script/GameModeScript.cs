@@ -37,9 +37,19 @@ public class GameModeScript : MonoBehaviour {
 		starObj.transform.SetParent(transform);
 	}
 
+	public void RegisterScore(int stars, Vector3 position)
+	{
+		RegisterScore (stars);
+		starObj.transform.localPosition = position;
+	}
+
 	public void RemoveStarDisplay()
 	{
 		if (starObj != null)
 			Destroy(starObj);
+	}
+
+	public void OnMenu(){
+		gameManager.ChangeState (GameManagerState.Menu);
 	}
 }
