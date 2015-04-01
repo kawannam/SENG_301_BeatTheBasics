@@ -86,6 +86,7 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 			ChangeState(State.Countdown);
 			break;
 		case State.Countdown:
+			gameManager.DisableKeyboard();
 			RemoveStarDisplay();
 			sheetMusic.Reset();
 			lowerText.enabled = true;
@@ -96,6 +97,7 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 			countdown = 3;
 			break;
 		case State.Listen:
+			gameManager.DisableKeyboard();
 			upperText.text = "Listen to the notes";
 			upperText.enabled = true;
 			lowerText.enabled = false;
@@ -105,6 +107,7 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 			songTimer = 0;
 			break;
 		case State.Input:
+			gameManager.EnableKeyboard();
 			upperText.text = "Which notes did you hear?";
 			lowerText.enabled = false;
 			upperText.enabled = true;
@@ -119,8 +122,8 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 			menu_2.SetActive(true);
 
 			upperText.enabled = false;
-			lowerText.enabled = true;
-			RegisterScore(resultsPoints / NUM_OF_NOTES * Constants.MAX_STARS);
+			lowerText.enabled = false;
+			RegisterScore((int)((float)resultsPoints / NUM_OF_NOTES * Constants.MAX_STARS));
 			break;
 		}
 	}
@@ -138,7 +141,6 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 				noteClr = Color.green;
 				resultsPoints++;
 			}
-			lowerText.text = resultsPoints.ToString() + " correct!";
 			sheetMusic.AddNote(new SheetMusicNote(NoteType.Whole, paramKey), noteClr);
 			inputIdx++;
 			break;
