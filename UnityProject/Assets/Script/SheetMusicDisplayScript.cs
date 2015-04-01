@@ -82,7 +82,7 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 
 	void Start()
 	{
-		startPosition = transform.localPosition;
+		startPosition = transform.localPosition;	// reset the offset
 	}
 
 	public void Reset()
@@ -104,7 +104,7 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 
 	public void AddNote(SheetMusicNote paramNote, Color paramColor)
 	{
-		notes.Add(paramNote);
+		notes.Add(paramNote);	// keep track of the notes we're adding
 
 		GameObject g = null;
 		Vector3 pos;
