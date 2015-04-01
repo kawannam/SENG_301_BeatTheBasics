@@ -13,6 +13,7 @@ public class RhythmTutor : GameModeScript {
 	public float[] rhythmMapEasy;
 	public float[] rhythmMapMed;
 	public int[] mapScore;
+	private Vector3 starPosition = new Vector3(0, 160, 0);
 
 //	public bool activeBeat;
 //	public bool ready;
@@ -61,7 +62,15 @@ public class RhythmTutor : GameModeScript {
 		ChangeState (State.Listen);
 	}
 
-
+	public int numStars()
+	{
+		int wrong = 0;
+		for (int i = 0; i < mapScore.Length; i++) {
+			if (mapScore[i] == 0)
+				wrong++;
+		}
+		return wrong;
+	}
 
 	public void ChangeState(State paramState){
 		switch (paramState) {
@@ -71,6 +80,8 @@ public class RhythmTutor : GameModeScript {
 			scoreObject.SetActive (false);
 			break;
 		*/case State.Listen:
+			gameManager.DisableKeyboard();
+			RemoveStarDisplay();
 			List<GameObject> children = new List<GameObject>();
 			foreach (Transform child in noteGroup1.transform) 
 				children.Add(child.gameObject);
@@ -111,6 +122,15 @@ public class RhythmTutor : GameModeScript {
 			scoreObject.SetActive (true);
 			int y = 65;
 			beatNumber = 0;
+			int bla = numStars();
+			if(bla > 2)
+				RegisterScore(0, starPosition);
+			else if(bla > 1)
+				RegisterScore(1, starPosition);
+			else if(bla > 0)
+				RegisterScore(2, starPosition);
+			else
+				RegisterScore(3, starPosition);
 			for(int i = 0; i < 2; i++)
 			{
 				int count = 1;
@@ -208,7 +228,9 @@ public class RhythmTutor : GameModeScript {
 				if(click)
 				{
 					if(played)
+					{
 						mapScore[beatNumber] = 0;
+					}
 					else
 					{
 						played = true;
