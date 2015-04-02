@@ -51,15 +51,16 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 	public Transform noteGrp;		// the parent of all the note sprites that will be added
 	private Vector3 startPosition;
 
+	// reset the offset
 	void Start()
 	{
-		startPosition = transform.localPosition;	// reset the offset
+		startPosition = transform.localPosition;	
 	}
 
 	/* Reset - deletes any notes added to the music display, and unshifts the display position */
 	public void Reset()
 	{
-		foreach(GameObject go in noteObjects)	// clear all the notes we may have on screen  
+		foreach(GameObject go in noteObjects)	  
 			GameObject.Destroy(go);
 
 		transform.localPosition = startPosition;
