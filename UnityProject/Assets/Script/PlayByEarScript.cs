@@ -43,7 +43,8 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 	public GameObject menu_2; 
 	private PianoKeyboardScript piano;
 
-	// Use this for initialization
+	//Sets the number of note based on difficulty
+	//Displays the piano on screen
 	public void Start () 
 	{		
 		switch (difficulty)
@@ -68,6 +69,8 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 		ChangeState(State.Init);
 	}
 
+	//This changes the state based on what the current state is
+	//Displays the correct screen
 	void ChangeState(State paramState)
 	{
 		state = paramState;
@@ -128,6 +131,7 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 		}
 	}
 
+	//Colours the displayed user input either red or green depending on correctness
 	public void OnPianoKeyDown(PianoKey paramKey)
 	{
 		switch(state)
@@ -147,32 +151,42 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 		}
 	}
 
+	//The Button the user uses to indate they want to input their answer
 	public void OnReady()
 	{
 		ChangeState(State.Input);
 	}
-	
+
+	//The button that allows the player to hear the notes
 	public void OnListen()
 	{
 		ChangeState(State.Listen);
 	}
-	
+
+	//The button to reattempt the last level
 	public void OnReplay()
 	{
 		ChangeState(State.Countdown);
 	}
-	
+
+	//Resets the game to the next level/group of notes
 	public void OnNext()
 	{
 		ChangeState(State.Init);
 	}
 
+	//Takes the user back to the main menu
 	public void OnMenu()
 	{
 		piano.observers.Remove(this);
 		gameManager.ChangeState(GameManagerState.Menu);
 	}
-	
+
+	/* This is called to actually run the countdown
+	 * And to actually play the notes to the user
+	 * And to actually collect input
+	 * One at a time in the above order
+	 */
 	void Update () 
 	{
 		switch(state)

@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public enum NoteType	// Note Lengths
+// Note Lengths
+public enum NoteType
 {
 	Whole,
 	Half,
@@ -17,14 +18,16 @@ public class SheetMusicNote
 	public NoteType type;
 	public PianoKey key;
 
+	// Gets the duration of note in seconds
 	public float Duration
 	{
 		get 
 		{ 
-			return (float)(Math.Pow(2, -((int)type))); 	// return the duration of note in seconds
+			return (float)(Math.Pow(2, -((int)type))); 
 		}
 	}
 
+	//Sets the key and type of a note
 	public SheetMusicNote(NoteType paramType, PianoKey paramKey)
 	{
 		type = paramType;
@@ -80,14 +83,16 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 	public Transform noteGrp;	// the parent of all the note sprites that will be added
 	private Vector3 startPosition;
 
+	// reset the offset
 	void Start()
 	{
-		startPosition = transform.localPosition;	// reset the offset
+		startPosition = transform.localPosition;	
 	}
 
+	// clear all the notes we may have on screen
 	public void Reset()
 	{
-		foreach(GameObject go in noteObjects)	// clear all the notes we may have on screen  
+		foreach(GameObject go in noteObjects)	  
 			GameObject.Destroy(go);
 
 		transform.localPosition = startPosition;
@@ -95,6 +100,7 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 		notes.Clear();
 	}
 
+	//Shifts where the note will be drawn
 	public void ShiftDisplay(float paramXOffs)
 	{
 		Vector3 pos = transform.localPosition;
@@ -102,6 +108,7 @@ public class SheetMusicDisplayScript : MonoBehaviour {
 		transform.localPosition = pos;
 	}
 
+	//This draws the note on the screen
 	public void AddNote(SheetMusicNote paramNote, Color paramColor)
 	{
 		notes.Add(paramNote);	// keep track of the notes we're adding

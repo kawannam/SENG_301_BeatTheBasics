@@ -8,7 +8,7 @@ public class StarDisplayScript : MonoBehaviour {
 	public Sprite[] sourceSprites;
 	public int numStars;
 
-	// Use this for initialization
+	// Draws stars on the screen (Meant for end of game level) 
 	void Start () {
 		for (int i = 0; i < numStars; i++)
 		{
