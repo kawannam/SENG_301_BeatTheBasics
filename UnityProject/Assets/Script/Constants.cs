@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum KeyState
+public enum KeyState	// The state of a piano key
 {
 	Released,
 	Pressed
 }
 
-public enum PianoKey
+public enum PianoKey	// the keys of the game piano keyboard
 {
-	L_C,
+	L_C,		// starting from LOWER C-note
 	L_Cs,
 	L_D,
 	L_Ds,
@@ -21,7 +21,7 @@ public enum PianoKey
 	L_A,
 	L_As,
 	L_B,
-	H_C,
+	H_C,		// HIGH C-note
 	H_Cs,
 	H_D,
 	H_Ds,
@@ -38,12 +38,12 @@ public enum PianoKey
 
 public static class Constants
 {	
-	public const int PIANO_NUM_KEYS = 24;
-	public static int MAX_BPM = 240;
-	public static int MIN_BPM = 1;
-	public const int NUM_OF_DIFFICULTY = 3;
-	public const int MAX_STARS = 3;
-	public static string[] PIANO_SOUND_FILES = new string[]{
+	public const int PIANO_NUM_KEYS = 24;		// 2 full octaves worth of keys
+	public static int MAX_BPM = 240;			// maximum BPM metronome setting
+	public static int MIN_BPM = 1;				// minimum BPM metronome setting
+	public const int NUM_OF_DIFFICULTY = 3;		// the number of difficulty levels
+	public const int MAX_STARS = 3;				// number of stars in a perfect game performance
+	public static string[] PIANO_SOUND_FILES = new string[]{	// file path of all piano soundclips, ordered according to the PianoKeys enum
 			"Sounds/piano2/piano.mf.C3",
 			"Sounds/piano2/piano.mf.Db3",
 			"Sounds/piano2/piano.mf.D3",
@@ -70,7 +70,7 @@ public static class Constants
 			"Sounds/piano2/piano.mf.B5"
 		};
 
-	public static KeyCode[] PIANO_KEY_BINDING = new KeyCode[]{
+	public static KeyCode[] PIANO_KEY_BINDING = new KeyCode[]{		// a list of which keys are bound to each note in the PianoKey enum
 			KeyCode.Q,
 			KeyCode.Alpha2,
 			KeyCode.W,

@@ -128,22 +128,4 @@ public class SightReadingTutorScript : GameModeScript, IPianoKeyboardObserver
 			}
 		}
 	}
-
-	// Update is called once per frame
-	void Update () 
-	{	
-		/*switch (state) 
-		{
-		case State.Play:
-			{
-				state = State.Result;
-				beatNumber = 0;
-				break;
-			}
-			break;
-		case State.Result:
-			//option to retry or exit
-			break;
-		}//switch*/
-	}
 }

@@ -1,16 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface IGameManagerScript
-{
-	PianoKeyboardScript GetKeyboard();
-	void ChangeState(GameManagerState paramState);
-	void OnDifficultySelect(Difficulty paramDiff);
-	void EnableKeyboard();
-	void DisableKeyboard();
-}
-
-public enum Difficulty
+public enum Difficulty		// difficulty setting for a game mode 
 {
 	Easy,
 	Medium,
@@ -19,7 +10,7 @@ public enum Difficulty
 
 public enum GameManagerState
 {
-	StartUp,
+	StartUp,		// game begins in this state
 	Menu,
 	TableOfContents,
 	PlayByEar,
@@ -29,15 +20,16 @@ public enum GameManagerState
 	StickerBook
 }
 
+/* GameManagerScript - handles the loading/switching of game modes, and holds a reference to the game keyboard */
 public class GameManagerScript : MonoBehaviour, IGameManagerScript 
 {
 	private GameManagerState state;
 	private DifficultyMenuScript difficultyMenu;
 
-	public GameObject pianoPrefab;
+	public GameObject pianoPrefab;			// game keyboard prefab
 	public GameObject menuPrefab;
-	public GameObject difficultyPrefab;
-	public GameObject metronomePrefab;
+	public GameObject difficultyPrefab;		// difficulty menu prefab
+	public GameObject metronomePrefab;		
 
 	// game mode prefabs
 	public GameObject playByEarPrefab;
@@ -47,9 +39,9 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 	public GameObject tableOfContentsPrefab;
 	
 	private GameObject currentObj;
-	private GameObject postDifficultyPrefab;
-	private GameModeType postDifficultyMode;
-	private PianoKeyboardScript pianoKeyboard;
+	private GameObject postDifficultyPrefab;	// which prefab to spawn after choosing a difficulty
+	private GameModeType postDifficultyMode;	// what the difficulty of the game mode should be, after spawning
+	private PianoKeyboardScript pianoKeyboard;	// the game keyboard the user interacts with
 
 	public PianoKeyboardScript GetKeyboard()
 	{ 
@@ -58,24 +50,26 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 
 	// Use this for initialization
 	void Start () {
-		ChangeState(GameManagerState.Menu);
+		ChangeState(GameManagerState.Menu);		// initialize the Menu
 	}
 
+	/* ExitState - Performs actions associated with leaving any particular state */
 	void ExitState(GameManagerState paramState)
 	{
 		Destroy(currentObj);
 		switch(paramState)
 		{
-		case GameManagerState.StartUp:
+		case GameManagerState.StartUp:		// if leaving the startup state, spawn the keyboard
 			GameObject gameObj = (GameObject)GameObject.Instantiate(pianoPrefab);
 			pianoKeyboard = gameObj.GetComponent<PianoKeyboardScript>();
 			break;
-		case GameManagerState.ClapBack:
+		case GameManagerState.ClapBack:		// enable keyboard after clapback, since it would be disabled
 			EnableKeyboard();
 			break;
 		}
 	}
 
+	/* OnDifficultySelect - After the user chooses a difficulty, loads the game mode, and sets the difficulty */
 	public void OnDifficultySelect(Difficulty paramDiff)
 	{
 		Destroy(currentObj);
@@ -86,21 +80,26 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 		gms.SetManager(this);
 	}
 	
+	/* DisableKeyboard - Greys out the keyboard, and disables input */
 	public void DisableKeyboard()
 	{
 		pianoKeyboard.spriteRenderer.color = Color.grey;
 		pianoKeyboard.enabled = false;
 	}
 	
+	/* EnableKeyboard - Restores keyboard to active state */
 	public void EnableKeyboard()
 	{
 		pianoKeyboard.spriteRenderer.color = Color.white;
 		pianoKeyboard.enabled = true;
 	}
 
+	/* ChangeState - Performs any actions associated with changing the game state, 
+	 * ie. instantiating a game object 
+	 */
 	public void ChangeState(GameManagerState paramState)
 	{
-		ExitState(state);
+		ExitState(state);	// first, do anything related to exiting the current state
 		switch(paramState)
 		{
 		case GameManagerState.StickerBook:
@@ -118,22 +117,22 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 		case GameManagerState.SightReading:
 			postDifficultyPrefab = sightPrefab;
 			postDifficultyMode = GameModeType.SightReading;
-			goto default;
+			goto default;										// load difficulty choice menu
 		case GameManagerState.ClapBack:
 			postDifficultyPrefab = rhythmPrefab;
 			postDifficultyMode = GameModeType.ClapBack;
-			goto default;
+			goto default;										// load difficulty choice menu
 		case GameManagerState.PlayByEar:
 			postDifficultyPrefab = playByEarPrefab;
 			postDifficultyMode = GameModeType.PlayByEar;
-			goto default;
+			goto default;										// load difficulty choice menu
 		default:
 			currentObj = (GameObject)GameObject.Instantiate(difficultyPrefab);
 			break;
 		}
-		GameModeScript mode = currentObj.GetComponent<GameModeScript>();
-		mode.SetManager(this);
+		GameModeScript mode = currentObj.GetComponent<GameModeScript>();	// every mode should inherit GameModeScript
+		mode.SetManager(this);		// pass a reference to the game manager
 
-		state = paramState;
+		state = paramState;		// update the current state
 	}
 }

@@ -11,3 +11,12 @@ To Build/Run:
 =============
 
 Load the Game scene located in Scenes folder, and press play/Run Scene
+
+
+Directories
+===========
+Scenes - 				contains all Unity scenes
+Script - 				all game scripts
+Resources/Prefabs - 	all game prefabs
+Resources/Sounds - 		all game sounds
+Resources/Textures - 	all game textures

@@ -50,6 +50,8 @@
      <Compile Include="Assets\Script\DifficultyMenuScript.cs" />
      <Compile Include="Assets\Script\GameManagerScript.cs" />
      <Compile Include="Assets\Script\GameModeScript.cs" />
+     <Compile Include="Assets\Script\IGameManagerScript.cs" />
+     <Compile Include="Assets\Script\IPianoKeyboardObserver.cs" />
      <Compile Include="Assets\Script\MenuScript.cs" />
      <Compile Include="Assets\Script\Metronome.cs" />
      <Compile Include="Assets\Script\MetronomeMenuScript.cs" />
@@ -58,6 +60,7 @@
      <Compile Include="Assets\Script\PlayByEarScript.cs" />
      <Compile Include="Assets\Script\RhythmTutor.cs" />
      <Compile Include="Assets\Script\SheetMusicDisplayScript.cs" />
+     <Compile Include="Assets\Script\SheetMusicNote.cs" />
      <Compile Include="Assets\Script\SightReadingTutorScript.cs" />
      <Compile Include="Assets\Script\StarDisplayScript.cs" />
      <Compile Include="Assets\Script\StickerBookScript.cs" />
