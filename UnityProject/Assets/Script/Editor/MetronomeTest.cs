@@ -9,6 +9,8 @@ using UnityTest;
 [Category("My Tests")]
 internal class MetronomeTests
 {
+
+	//Test initializing Metronome
 	[Test]
 	[Category("Expected Outcome Test")]
 	public void Test_initMetronome()
@@ -21,6 +23,7 @@ internal class MetronomeTests
 		Assert.AreEqual (expected, actual, "Metronome BPM Failed to Initialize properly");
 	}
 
+	//Test setting BPM of Metronome
 	[Test]
 	[Category("Expected Outcome Test")]
 	public void Test_setBPM()
@@ -34,6 +37,7 @@ internal class MetronomeTests
 		Assert.AreEqual (expected, actual, "Failed to set BPM");
 	}
 
+	//Test BPM range checking
 	[Test]
 	[Category("Expected Outcome Test")]
 	public void Test_minBPM()
@@ -47,6 +51,7 @@ internal class MetronomeTests
 		Assert.AreEqual (expected, actual, "Invalid BPM value");
 	}
 
+	//Test BPM range checking
 	[Test]
 	[Category("Expected Outcome Test")]
 	public void Test_maxBPM()

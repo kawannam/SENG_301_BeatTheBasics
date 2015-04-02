@@ -13,12 +13,11 @@ internal class GameTests
 	[Category("Expected Outcome Test")]
 	public void Test_PBE_Difficulty()
 	{
-		GameObject t = Resources.Load<GameObject> ("Prefabs/PlayByEarObject");
+		GameObject t = Resources.Load<GameObject> ("Prefabs/PlayByEarScript");
+		PlayByEarScript earObj = t.AddComponent<PlayByEarScript> ();
 
-		PlayByEarScript earObj = t.GetComponent<PlayByEarScript> ();
-
-
-		GameModeScript gms = t.GetComponent<GameModeScript> ();
+		GameObject g = Resources.Load<GameObject> ("Prefabs/GameModeScript");
+		GameModeScript gms = g.AddComponent<GameModeScript> ();
 
 		gms.SetDifficulty (Difficulty.Hard);
 		earObj.Start ();

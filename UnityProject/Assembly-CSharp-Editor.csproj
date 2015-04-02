@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Script\Editor\MetronomeTest.cs" />
      <Compile Include="Assets\Script\Editor\MyTests.cs" />
+     <Compile Include="Assets\Script\Editor\PianoKeyTest.cs" />
      <Compile Include="Assets\Script\Editor\StickerBookTests.cs" />
      <Compile Include="Assets\Script\Editor\uGUITools.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionComponentEditor.cs" />
