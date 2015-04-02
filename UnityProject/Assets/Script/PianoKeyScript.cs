@@ -10,28 +10,28 @@ public class PianoKeyScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
 		if (!Input.GetMouseButton(0))
 			pressed = false;
 	}
 	
-	void OnMouseDown()
+	public void OnMouseDown()
 	{
 		pressed = true;
 	}
 
-	void OnMouseUp()
+	public void OnMouseUp()
 	{
 		pressed = false;
 	}
 	
-	void OnMouseEnter()
+	public void OnMouseEnter()
 	{
 		if (Input.GetMouseButton(0))
 			pressed = true;
 	}
 
-	void OnMouseExit()
+	public void OnMouseExit()
 	{
 		pressed = false;
 	}

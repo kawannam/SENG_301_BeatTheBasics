@@ -13,6 +13,11 @@ internal class PianoKeyTests
 	[Category("Expected Outcome Test")]
 	public void Test_pressMouse()
 	{
-		Assert.Pass();
+		PianoKeyScript pKey = new PianoKeyScript ();
+		pKey.OnMouseDown ();
+		bool expected = true;
+		bool actual = pKey.pressed;
+		Assert.AreEqual (expected, actual, "Key press was not registered");
+
 	}
 }

@@ -14,18 +14,16 @@ internal class GameTests
 	public void Test_PBE_Difficulty()
 	{
 		GameObject t = Resources.Load<GameObject> ("Prefabs/PlayByEarScript");
-		PlayByEarScript earObj = t.AddComponent<PlayByEarScript> ();
+		PlayByEarScript earObj = t.GetComponent<PlayByEarScript> ();
 
 		GameObject g = Resources.Load<GameObject> ("Prefabs/GameModeScript");
-		GameModeScript gms = g.AddComponent<GameModeScript> ();
+		GameModeScript gms = g.GetComponent<GameModeScript> ();
 
 		gms.SetDifficulty (Difficulty.Hard);
 		earObj.Start ();
 		int expected = 3;
 		int actual = earObj.NUM_OF_NOTES;
 		Assert.AreEqual (expected, actual);
-
-	
 	}
 
 	[Test]
