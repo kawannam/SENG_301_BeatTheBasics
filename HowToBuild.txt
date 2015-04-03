@@ -1,0 +1,31 @@
+How To Build:
+
+Requirements:
+=============
+
+Unity 4.6.3:	http://unity3d.com/get-unity/download/archive			(note: only tested with version 4.6.3)
+GitHub repo:	https://github.com/kawannam/SENG_301_BeatTheBasics
+
+
+To Build/Run:
+=============
+
+Load the Game scene located in Scenes folder, from inside Unity. Press play/Run Scene.
+
+
+Directories
+===========
+Scenes - 				contains all Unity scenes
+Script - 				all game scripts
+Resources/Prefabs - 		all game prefabs
+Resources/Sounds - 		all game sounds
+Resources/Textures - 		all game textures
+
+
+To View Project Solution
+========================
+Use MonoDevelop to view code.  Load the solution file by duoble clicking the script file in Unity.  Do not load it directly through other programs, as it may contain missing references.  Opening the solution with Unity will update the solution file with references relative to your directory structure.  
+
+Running Test
+============
+Run them via the UnityTestTools menu -> Unit Test Runner.
