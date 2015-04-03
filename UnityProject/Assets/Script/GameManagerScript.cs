@@ -8,8 +8,10 @@ public interface IGameManagerScript
 	void OnDifficultySelect(Difficulty paramDiff);
 	void EnableKeyboard();
 	void DisableKeyboard();
+	void HideKeyboard ();
 }
 
+//Difficulty settings
 public enum Difficulty
 {
 	Easy,
@@ -17,6 +19,7 @@ public enum Difficulty
 	Hard
 }
 
+//Game features
 public enum GameManagerState
 {
 	StartUp,
@@ -90,7 +93,13 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 		pianoKeyboard.spriteRenderer.color = Color.grey;
 		pianoKeyboard.enabled = false;
 	}
-	
+
+	public void HideKeyboard()
+	{
+		pianoKeyboard.spriteRenderer.color = new Color (0, 0, 0, 0);
+		pianoKeyboard.enabled = false;
+	}
+
 	public void EnableKeyboard()
 	{
 		pianoKeyboard.spriteRenderer.color = Color.white;

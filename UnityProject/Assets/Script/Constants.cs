@@ -1,12 +1,26 @@
-﻿using UnityEngine;
+﻿/*
+Last updated: April 1, 2015
+Description: Data file: holds constants and sound information
+*/
+using UnityEngine;
 using System.Collections;
 
+//State of a piano key: is it being pressed or is it released
 public enum KeyState
 {
 	Released,
 	Pressed
 }
 
+//Minigames
+public enum GameModeType
+{
+	PlayByEar,
+	SightReading,
+	ClapBack
+}
+
+//Piano notes: from low C to high B
 public enum PianoKey
 {
 	L_C,
@@ -36,12 +50,13 @@ public enum PianoKey
 	MAX
 }
 
+//Constants and piano sounds
 public static class Constants
 {	
 	public const int PIANO_NUM_KEYS = 24;
 	public static int MAX_BPM = 240;
 	public static int MIN_BPM = 1;
-	public const int NUM_OF_DIFFICULTY = 3;
+	public const int NUM_OF_DIFFICULTY = 3;//Number of difficulty modes
 	public const int MAX_STARS = 3;
 	public static string[] PIANO_SOUND_FILES = new string[]{
 			"Sounds/piano2/piano.mf.C3",
@@ -70,6 +85,7 @@ public static class Constants
 			"Sounds/piano2/piano.mf.B5"
 		};
 
+	//Piano key bindings to the computer keyboard
 	public static KeyCode[] PIANO_KEY_BINDING = new KeyCode[]{
 			KeyCode.Q,
 			KeyCode.Alpha2,
