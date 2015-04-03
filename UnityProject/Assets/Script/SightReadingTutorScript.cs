@@ -124,50 +124,26 @@ public class SightReadingTutorScript : GameModeScript, IPianoKeyboardObserver
  */
 	public void OnPianoKeyDown(PianoKey paramKey)
 	{
-		if (state == State.Play)
-		{
+		if (state == State.Play) {
 			Color noteClr = Color.green;
-			if (beatNumber < playerInput.Length)
-			{
-				playerInput[beatNumber] = (int)paramKey;	
-				if (playerInput[beatNumber] == musicScore[beatNumber])
-				{
+			if (beatNumber < playerInput.Length) {
+				playerInput [beatNumber] = (int)paramKey;	
+				if (playerInput [beatNumber] == musicScore [beatNumber]) {
 					//print correct to screen
 					points++;
-				}
-				else
-				{
+				} else {
 					noteClr = Color.red;
 					//print player input + wrong
 				}
 			}
-			inputDisplay.AddNote(new SheetMusicNote(NoteType.Quarter, paramKey), noteClr);
+			inputDisplay.AddNote (new SheetMusicNote (NoteType.Quarter, paramKey), noteClr);
 			beatNumber++;		
 			if (beatNumber >= musicScore.Length)
-				ChangeState(State.Result);
-			else
-			{
-				inputDisplay.ShiftDisplay(X_STEP);
-				musicDisplay.ShiftDisplay(X_STEP);
+				ChangeState (State.Result);
+			else {
+				inputDisplay.ShiftDisplay (X_STEP);
+				musicDisplay.ShiftDisplay (X_STEP);
 			}
 		}
-	}
-
-	// Update is called once per frame
-	void Update () 
-	{	
-		/*switch (state) 
-		{
-		case State.Play:
-			{
-				state = State.Result;
-				beatNumber = 0;
-				break;
-			}
-			break;
-		case State.Result:
-			//option to retry or exit
-			break;
-		}//switch*/
 	}
 }
