@@ -16,11 +16,8 @@ internal class GameTests
 		GameObject testGame = Resources.Load<GameObject> ("Prefabs/PlayByEarObject");
 		
 		PlayByEarScript earObj = testGame.GetComponent<PlayByEarScript> ();
-//		GameObject pianoDef = Resources.Load<GameObject> ("Prefabs/PianoKeyboardPrefab");
-//		GameObject pianoObj = (GameObject)GameObject.Instantiate (pianoDef);
-//		PianoKeyboardScript pianoObj = new PianoKeyboardScript ();
-
-		//???????????????????????
+		GameObject pianoDef = Resources.Load<GameObject> ("Prefabs/PianoKeyboardPrefab");
+		GameObject pianoObj = (GameObject)GameObject.Instantiate (pianoDef);
 
 		earObj.SetDifficulty (Difficulty.Hard);
 		earObj.Start ();
@@ -28,7 +25,7 @@ internal class GameTests
 		int actual = earObj.NUM_OF_NOTES;
 		Assert.AreEqual (expected, actual);
 		
-/*		earObj.SetDifficulty (Difficulty.Medium);
+		earObj.SetDifficulty (Difficulty.Medium);
 		earObj.Start ();
 		expected = 2;
 		actual = earObj.NUM_OF_NOTES;
@@ -39,9 +36,7 @@ internal class GameTests
 		expected = 1;
 		actual = earObj.NUM_OF_NOTES;
 		Assert.AreEqual (expected, actual);
-		*/
 	}
-
 
 	[Test]
 	[Category("Expected Outcome Test")]
@@ -75,7 +70,4 @@ internal class GameTests
 			Assert.AreEqual (expected, actual);
 		}
 	}
-	//throw new Exception("");
-
-
 }
