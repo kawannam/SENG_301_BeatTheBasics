@@ -89,7 +89,8 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 			ChangeState(State.Countdown);
 			break;
 		case State.Countdown:
-			gameManager.DisableKeyboard();
+			if (gameManager != null) 
+				gameManager.DisableKeyboard();
 			RemoveStarDisplay();
 			sheetMusic.Reset();
 			lowerText.enabled = true;
@@ -100,7 +101,8 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 			countdown = 3;
 			break;
 		case State.Listen:
-			gameManager.DisableKeyboard();
+			if (gameManager != null) 
+				gameManager.DisableKeyboard();
 			upperText.text = "Listen to the notes";
 			upperText.enabled = true;
 			lowerText.enabled = false;
@@ -110,7 +112,8 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 			songTimer = 0;
 			break;
 		case State.Input:
-			gameManager.EnableKeyboard();
+			if (gameManager != null) 
+				gameManager.EnableKeyboard();
 			upperText.text = "Which notes did you hear?";
 			lowerText.enabled = false;
 			upperText.enabled = true;
