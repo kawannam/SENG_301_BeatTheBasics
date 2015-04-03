@@ -71,18 +71,18 @@ public static class Constants
 			"Sounds/piano2/piano.mf.A3",
 			"Sounds/piano2/piano.mf.Bb3",
 			"Sounds/piano2/piano.mf.B3",
-			"Sounds/piano2/piano.mf.C5",
-			"Sounds/piano2/piano.mf.Db5",
-			"Sounds/piano2/piano.mf.D5",
-			"Sounds/piano2/piano.mf.Eb5",
-			"Sounds/piano2/piano.mf.E5",
-			"Sounds/piano2/piano.mf.F5",
-			"Sounds/piano2/piano.mf.Gb5",
-			"Sounds/piano2/piano.mf.G5",
-			"Sounds/piano2/piano.mf.Ab5",
-			"Sounds/piano2/piano.mf.A5",
-			"Sounds/piano2/piano.mf.Bb5",
-			"Sounds/piano2/piano.mf.B5"
+			"Sounds/piano2/piano.mf.C4",
+			"Sounds/piano2/piano.mf.Db4",
+			"Sounds/piano2/piano.mf.D4",
+			"Sounds/piano2/piano.mf.Eb4",
+			"Sounds/piano2/piano.mf.E4",
+			"Sounds/piano2/piano.mf.F4",
+			"Sounds/piano2/piano.mf.Gb4",
+			"Sounds/piano2/piano.mf.G4",
+			"Sounds/piano2/piano.mf.Ab4",
+			"Sounds/piano2/piano.mf.A4",
+			"Sounds/piano2/piano.mf.Bb4",
+			"Sounds/piano2/piano.mf.B4"
 		};
 
 	//Piano key bindings to the computer keyboard
