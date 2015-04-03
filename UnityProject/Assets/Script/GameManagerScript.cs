@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum Difficulty		// difficulty setting for a game mode 
+//Difficulty settings
+public enum Difficulty
 {
 	Easy,
 	Medium,
 	Hard
 }
 
+//Game features
 public enum GameManagerState
 {
 	StartUp,		// game begins in this state
@@ -86,8 +88,13 @@ public class GameManagerScript : MonoBehaviour, IGameManagerScript
 		pianoKeyboard.spriteRenderer.color = Color.grey;
 		pianoKeyboard.enabled = false;
 	}
-	
-	/* EnableKeyboard - Restores keyboard to active state */
+
+	public void HideKeyboard()
+	{
+		pianoKeyboard.spriteRenderer.color = new Color (0, 0, 0, 0);
+		pianoKeyboard.enabled = false;
+	}
+
 	public void EnableKeyboard()
 	{
 		pianoKeyboard.spriteRenderer.color = Color.white;
