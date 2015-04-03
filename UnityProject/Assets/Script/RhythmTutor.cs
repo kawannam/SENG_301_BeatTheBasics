@@ -56,25 +56,25 @@ public class RhythmTutor : GameModeScript {
 	//BUTTONS
 
 	//Ready button
-	public void onReady ()
+	public void OnReady ()
 	{
 		ChangeState(State.Playback);
 	}
 
 	//Repeat button
-	public void onRepeat()
+	public void OnRepeat()
 	{
 		ChangeState (State.Listen);
 	}
 
 	//Replay button
-	public void onReplay()
+	public void OnReplay()
 	{
 		ChangeState (State.Listen);
 	}
 
 	//Next button
-	public void onNext()
+	public void OnNext()
 	{
 		int diff = (int)difficulty;
 		diff++;

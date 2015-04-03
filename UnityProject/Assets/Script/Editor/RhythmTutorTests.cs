@@ -10,10 +10,11 @@ using UnityTest;
 internal class RhythmTutorTests
 {
 	[Test]
-	[Category("Failing Tests")]
+	[Category("Expected Outcome Test")]
 	public void RhythmTutor_test()
 	{
-		throw new Exception("");
+		RhythmTutor rhyTut = new RhythmTutor();
+		
 	}
 
 }

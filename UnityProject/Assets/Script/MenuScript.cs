@@ -1,3 +1,8 @@
+/*
+Last Updated: April 2, 2015
+Description: Describes the menu features
+*/
+
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -12,10 +17,14 @@ public class MenuScript : GameModeScript {
 		"Free Play\n\nNo frills piano mode + metronome",
 		"Sticker Book\n\nView collected stickers"
 	};
-	
+
+	//VARIABLES
+
 	public int menuIdx;		// which page of menu we are on
 	public Text page1;		// page 1 text object
 	public Text page2;		// page 2 text object
+
+	//FUNCTIONS
 
 	// Use this for initialization
 	void Start () 
@@ -23,11 +32,13 @@ public class MenuScript : GameModeScript {
 		OnPrevNext(0);
 	}
 
+	//Update game manager
 	public void SetGameManager(IGameManagerScript paramGame)
 	{
 		gameManager = paramGame;
 	}
 
+	//Cycle to the previous/next menu screen
 	public void OnPrevNext(int paramDir)
 	{
 		menuIdx += paramDir;
@@ -40,6 +51,7 @@ public class MenuScript : GameModeScript {
 		page2.text = text[menuIdx + 1];
 	}
 
+	//Change state to the feature selected
 	public void OnSelect(int paramNum)
 	{
 		int selection = paramNum + menuIdx;
