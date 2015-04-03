@@ -24,7 +24,7 @@ internal class PianoKeyTests
 	//Test pressed for Mouse up method
 	[Test]
 	[Category("Expected Outcome Test")]
-	public void Test_pressMouse()
+	public void Test_MouseUp()
 	{
 		PianoKeyScript pKey = new PianoKeyScript ();
 		pKey.OnMouseUp ();
@@ -36,7 +36,7 @@ internal class PianoKeyTests
 	//Test pressed for Mouse Enter method
 	[Test]
 	[Category("Expected Outcome Test")]
-	public void Test_pressMouse()
+	public void Test_MouseEnter()
 	{
 		PianoKeyScript pKey = new PianoKeyScript ();
 		pKey.OnMouseEnter ();
@@ -48,7 +48,7 @@ internal class PianoKeyTests
 	//Test pressed for Mouse exit method
 	[Test]
 	[Category("Expected Outcome Test")]
-	public void Test_pressMouse()
+	public void Test_MouseExit()
 	{
 		PianoKeyScript pKey = new PianoKeyScript ();
 		pKey.OnMouseExit ();
