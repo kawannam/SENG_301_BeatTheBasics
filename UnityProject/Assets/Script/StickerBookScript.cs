@@ -2,8 +2,6 @@
 using UnityEngine.UI;
 using System.Collections;
 
-
-
 public class StickerBookScript : GameModeScript {
 
 	public Image[] StickerList = new Image[9];					//Creates an Array of 9 images (Stickers) for sticker book
@@ -25,7 +23,7 @@ public class StickerBookScript : GameModeScript {
 		}
 	}
 
-	public void quit(){
+	public void Quit(){
 		gameManager.ChangeState (GameManagerState.Menu);		//Connects to the home menu button
 	}
 }
