@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 
-	public enum State
+	public enum State	// internal states of the PlayByEarScript
 	{
 		Init,
 		Countdown,
@@ -43,7 +43,8 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 	public GameObject menu_2; 
 	private PianoKeyboardScript piano;
 
-	// Use this for initialization
+	//Sets the number of note based on difficulty
+	//Displays the piano on screen
 	public void Start () 
 	{		
 		switch (difficulty)
@@ -59,15 +60,17 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 			break;
 		}
 
-		piano = GameObject.FindGameObjectWithTag("PianoKeyBoard").GetComponent<PianoKeyboardScript>();
-		piano.observers.Add(this);
-		audioClips = new AudioClip[Constants.PIANO_NUM_KEYS];
+		piano = GameObject.FindGameObjectWithTag("PianoKeyBoard").GetComponent<PianoKeyboardScript>();	// locate the piano keyboard object
+		piano.observers.Add(this);										// get notified when a piano key is pressed
+		audioClips = new AudioClip[Constants.PIANO_NUM_KEYS];			// load the piano sound clips
 		for (int i = 0; i < Constants.PIANO_NUM_KEYS; i++)
 			audioClips[i] = Resources.Load<AudioClip>(Constants.PIANO_SOUND_FILES[i]);
 	
 		ChangeState(State.Init);
 	}
 
+	//This changes the state based on what the current state is
+	//Displays the correct screen
 	void ChangeState(State paramState)
 	{
 		state = paramState;
@@ -128,6 +131,9 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 		}
 	}
 
+	/* OnPianoKeyDown - Will check if the user input is correct, invoked by the keyboard object when a keypress is made
+	 * Will add a red note if input is wrong or green note if input is correct
+	*/
 	public void OnPianoKeyDown(PianoKey paramKey)
 	{
 		switch(state)
@@ -147,32 +153,36 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 		}
 	}
 
-	public void OnReady()
-	{
-		ChangeState(State.Input);
-	}
-	
 	public void OnListen()
 	{
-		ChangeState(State.Listen);
-	}
-	
-	public void OnReplay()
-	{
-		ChangeState(State.Countdown);
-	}
-	
-	public void OnNext()
-	{
-		ChangeState(State.Init);
+		ChangeState(State.Listen);		// listen to the notes again
 	}
 
-	public void OnMenu()
+	//The button to reattempt the last level
+	public void OnReplay()
+	{
+		ChangeState(State.Countdown);	// play same note again, go the start
+	}
+
+	//Resets the game to the next level/group of notes
+	public void OnNext()
+	{
+		ChangeState(State.Init);	// pick a new note, then play 
+	}
+
+	//Takes the user back to the main menu
+	public new void OnMenu()
 	{
 		piano.observers.Remove(this);
 		gameManager.ChangeState(GameManagerState.Menu);
 	}
-	
+
+	/* Update - Game logic loop, gets called every frame 
+	 * This is called to actually run the countdown
+	 * And to actually play the notes to the user
+	 * And to actually collect input
+	 * One at a time in the above order
+	 */
 	void Update () 
 	{
 		switch(state)
@@ -184,7 +194,7 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 				ChangeState(State.Listen);
 			break;
 		case State.Listen:
-			if (songIdx < NUM_OF_NOTES && songTimer <= 0)
+			if (songIdx < NUM_OF_NOTES && songTimer <= 0)		// if we have not played all the notes yet
 			{
 				source.Stop();
 				int keyIdx = (int)songKeys[songIdx];
@@ -194,7 +204,7 @@ public class PlayByEarScript : GameModeScript, IPianoKeyboardObserver {
 				songIdx++;
 			}
 			songTimer -= Time.deltaTime;
-			if (songIdx >= NUM_OF_NOTES && songTimer <= -2)
+			if (songIdx >= NUM_OF_NOTES && songTimer <= -2)		// all notes played, go to input state
 				ChangeState(State.Input);
 			break;
 		case State.Input:
