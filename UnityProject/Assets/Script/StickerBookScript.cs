@@ -2,12 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public enum GameModeType
-{
-	PlayByEar,
-	SightReading,
-	ClapBack
-}
+
 
 public class StickerBookScript : GameModeScript {
 

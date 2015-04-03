@@ -10,13 +10,18 @@ GitHub repo:	https://github.com/kawannam/SENG_301_BeatTheBasics
 To Build/Run:
 =============
 
+<<<<<<< HEAD
 Load the Game scene located in Scenes folder, from inside Unity. Press play/Run Scene.
+=======
+Load the Game scene located in Scenes folder, and press play/Run Scene
+>>>>>>> master
 
 
 Directories
 ===========
 Scenes - 				contains all Unity scenes
 Script - 				all game scripts
+<<<<<<< HEAD
 Resources/Prefabs - 		all game prefabs
 Resources/Sounds - 		all game sounds
 Resources/Textures - 		all game textures
@@ -29,3 +34,8 @@ Use MonoDevelop to view code.  Load the solution file by duoble clicking the scr
 Running Test
 ============
 Run them via the UnityTestTools menu -> Unit Test Runner.
+=======
+Resources/Prefabs - 	all game prefabs
+Resources/Sounds - 		all game sounds
+Resources/Textures - 	all game textures
+>>>>>>> master

@@ -2,11 +2,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public interface IPianoKeyboardObserver
-{
-	void OnPianoKeyDown(PianoKey paramKey);
-}
-
 public class PianoKeyboardScript : MonoBehaviour  
 {
 	const int NUM_KEYS = 24;	// keys for 2 full octaves
