@@ -23,7 +23,6 @@ internal class RhythmTutorTests
 		int actual = rhyTut.NumWrong ();
 		int expected = 0;
 		Assert.AreEqual (actual, expected);
-		
 	}
 
 }
