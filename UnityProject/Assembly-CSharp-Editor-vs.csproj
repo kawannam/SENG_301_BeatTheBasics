@@ -51,7 +51,6 @@
      <Compile Include="Assets\Script\Editor\PlayByEarTests.cs" />
      <Compile Include="Assets\Script\Editor\RhythmTutorTests.cs" />
      <Compile Include="Assets\Script\Editor\StickerBookTests.cs" />
-     <Compile Include="Assets\Script\Editor\uGUITools.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionComponentEditor.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionExplorerWindow.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionListRenderer.cs" />
