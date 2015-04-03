@@ -11,7 +11,7 @@ public class Metronome : GameModeScript {
 	public AudioSource source;
 
 //Sets the initial bpm to 120 (Standard speed)
-	void Start () {
+	public void Start () {
 		bpm = 120;										
 	}
 

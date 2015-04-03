@@ -8,4 +8,5 @@ public interface IGameManagerScript		// an interface that GameModeScript's can u
 	void OnDifficultySelect(Difficulty paramDiff);
 	void EnableKeyboard();
 	void DisableKeyboard();
+	void HideKeyboard ();
 }
