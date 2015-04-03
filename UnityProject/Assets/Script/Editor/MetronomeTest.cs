@@ -9,7 +9,6 @@ using UnityTest;
 [Category("My Tests")]
 internal class MetronomeTests
 {
-
 	//Test initializing Metronome
 	[Test]
 	[Category("Expected Outcome Test")]

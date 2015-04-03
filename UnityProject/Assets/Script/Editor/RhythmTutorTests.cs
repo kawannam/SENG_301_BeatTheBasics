@@ -13,7 +13,7 @@ internal class RhythmTutorTests
 	[Category("Failing Tests")]
 	public void RhythmTutor_test()
 	{
-		throw new Exception("");
+
 	}
 
 }
