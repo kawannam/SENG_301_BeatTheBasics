@@ -47,8 +47,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Script\Editor\MetronomeTest.cs" />
-     <Compile Include="Assets\Script\Editor\MyTests.cs" />
      <Compile Include="Assets\Script\Editor\PianoKeyTest.cs" />
+     <Compile Include="Assets\Script\Editor\PlayByEarTests.cs" />
      <Compile Include="Assets\Script\Editor\RhythmTutorTests.cs" />
      <Compile Include="Assets\Script\Editor\StickerBookTests.cs" />
      <Compile Include="Assets\Script\Editor\uGUITools.cs" />
@@ -70,7 +70,6 @@
      <Compile Include="Assets\UnityTestTools\Common\Editor\ResultWriter\StackTraceFilter.cs" />
      <Compile Include="Assets\UnityTestTools\Common\Editor\ResultWriter\XmlResultWriter.cs" />
      <Compile Include="Assets\UnityTestTools\Common\Editor\Styles.cs" />
-     <Compile Include="Assets\UnityTestTools\Examples\UnitTestExamples\Editor\SampleTests.cs" />
      <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\Batch.cs" />
      <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\IntegrationTestsRunnerSettings.cs" />
      <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\IntegrationTestsRunnerWindow.cs" />
